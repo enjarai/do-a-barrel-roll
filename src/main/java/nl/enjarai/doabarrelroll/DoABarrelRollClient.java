@@ -80,7 +80,6 @@ public class DoABarrelRollClient implements ClientModInitializer {
 				var change = Math.sin(roll);
 
 				var scalar = 10 * ElytraMath.sigmoid(client.player.getVelocity().length()*2-2);
-				System.out.println(client.player.getVelocity().length() + " - " + scalar);
 				change *= scalar;
 
 				yaw += change;
