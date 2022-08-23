@@ -24,7 +24,7 @@ public class DoABarrelRollClient implements ClientModInitializer {
 	@Override
     public void onInitializeClient() { // TODO triple jump to activate???
     }
-	
+
 
 	public static void updateMouse(ClientPlayerEntity player, double cursorDeltaX, double cursorDeltaY) {
 		
@@ -64,12 +64,26 @@ public class DoABarrelRollClient implements ClientModInitializer {
 			lastTurnTime = time;
 
 			var yawDelta = 10f;
-			var yaw = 0;
+			var yaw = 0f;
 			if (client.options.leftKey.isPressed()) {
 				yaw -= yawDelta;
 			}
 			if (client.options.rightKey.isPressed()) {
 				yaw += yawDelta;
+			}
+
+			//Realistic roll keep adding to yaw.
+			if (!client.isPaused()) {
+				double roll = -Math.acos(left.dotProduct(ElytraMath.getAssumedLeft(client.player.getYaw()))) * TODEG;
+				if (left.getY() < 0) roll *= -1;
+				roll = Math.toRadians(roll);
+				var change = Math.sin(roll);
+
+				var scalar = 10 * ElytraMath.sigmoid(client.player.getVelocity().length()*2-2);
+				System.out.println(client.player.getVelocity().length() + " - " + scalar);
+				change *= scalar;
+
+				yaw += change;
 			}
 
 			ElytraMath.changeElytraLook(client.player, 0, yawSmoother.smooth(yaw, delta), 0);
