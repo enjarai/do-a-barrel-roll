@@ -98,8 +98,8 @@ public class DoABarrelRollClient implements ClientModInitializer {
 				lastLookUpdate = GlfwUtil.getTime();
 
 			} else {
-
-				var yawDelta = 25f * (ModConfig.INSTANCE.switchRollAndYaw ? ModConfig.INSTANCE.responsiveness.roll : ModConfig.INSTANCE.responsiveness.yaw);
+				//This is floating point number
+				var yawDelta = 10f * (ModConfig.INSTANCE.switchRollAndYaw ? ModConfig.INSTANCE.responsiveness.roll : ModConfig.INSTANCE.responsiveness.yaw);
 				double yaw = 0;
 
 				// Strafe buttons
