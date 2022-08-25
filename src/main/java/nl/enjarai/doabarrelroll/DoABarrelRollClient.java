@@ -74,7 +74,7 @@ public class DoABarrelRollClient implements ClientModInitializer {
 			// enlarge the vector and apply it to the camera
 			var delta = getDelta();
 			var readyTurnVec = mouseTurnVec.multiply(1200 * (float) delta);
-			changeElytraLook(readyTurnVec.y, 0, readyTurnVec.x, ModConfig.INSTANCE.desktopSensitivity, delta);
+			changeElytraLook(readyTurnVec.y, 0, readyTurnVec.x, ModConfig.INSTANCE.desktopSensitivity, delta, true);
 
 		} else {
 
@@ -111,7 +111,7 @@ public class DoABarrelRollClient implements ClientModInitializer {
 				}
 
 				changeElytraLook(0, yaw, 0, ModConfig.INSTANCE.desktopSensitivity);
-			
+
 
 				double roll = 0;
 				if (ModConfig.INSTANCE.switchRollAndYaw) {
@@ -125,13 +125,13 @@ public class DoABarrelRollClient implements ClientModInitializer {
 					if (left.getY() < 0) currentRoll *= -1;
 					var change = Math.sin(currentRoll);
 
-					var scalar = 10 * ElytraMath.sigmoid(client.player.getVelocity().length()*2-2) * ModConfig.INSTANCE.bankingStrength;
+					var scalar = 10 * ElytraMath.sigmoid(client.player.getVelocity().length() * 2 - 2) * ModConfig.INSTANCE.bankingStrength;
 					change *= scalar;
 
 					yaw += change;
 				}
 				//Change with identity sensitivity
-				changeElytraLook(0, yaw, roll, Sensitivity.identity(), false);
+				changeElytraLook(0, yaw, roll, Sensitivity.identity(), getDelta(), false);
 
 			}
 		}
@@ -165,7 +165,7 @@ public class DoABarrelRollClient implements ClientModInitializer {
 	 *
 	 * <p>
 	 * <b>Only call if you're going to call
-	 * {@link DoABarrelRollClient#changeElytraLook(double, double, double, Sensitivity, double)}
+	 * {@link DoABarrelRollClient#changeElytraLook(double, double, double, Sensitivity, double, boolean)}
 	 * right after this using the returned value.</b>
 	 * Neglecting to do this will disrupt the smoothness of the camera.
 	 * </p>
