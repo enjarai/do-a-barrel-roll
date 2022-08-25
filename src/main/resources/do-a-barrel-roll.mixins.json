@@ -6,9 +6,12 @@
   "client": [
     "ClientPlayerEntityMixin",
     "GameRendererMixin",
-    "MouseMixin"
+    "MouseMixin",
+    "InGameHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-	}
+  },
+  "mixins": [
+  ]
 }

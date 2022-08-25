@@ -1,3 +1,2 @@
-- Added the ability to switch the yaw and roll axes.
-- Added sensitivity settings.
-- Added controller compat via MidnightControls.
+- Fixed camera drifting while game is paused (#5)
+- Added momentum based camera movement option

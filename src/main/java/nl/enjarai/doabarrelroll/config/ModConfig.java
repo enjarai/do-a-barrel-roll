@@ -9,6 +9,7 @@ import nl.enjarai.doabarrelroll.DoABarrelRollClient;
 
 @Config(name = DoABarrelRollClient.MODID)
 public class ModConfig implements ConfigData {
+    @ConfigEntry.Gui.Excluded
     public static ModConfig INSTANCE;
 
     public static void init() {
@@ -18,6 +19,12 @@ public class ModConfig implements ConfigData {
 
     @ConfigEntry.Gui.Tooltip
     public boolean switchRollAndYaw = false;
+
+    @ConfigEntry.Gui.Tooltip
+    public boolean momentumBasedMouse = false;
+
+    @ConfigEntry.Gui.Tooltip
+    public boolean showMomentumWidget = true;
 
     @ConfigEntry.Gui.CollapsibleObject
     public Sensitivity desktopSensitivity = new Sensitivity(1, 0.4, 1);
