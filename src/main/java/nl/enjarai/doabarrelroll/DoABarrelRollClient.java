@@ -110,9 +110,7 @@ public class DoABarrelRollClient implements ClientModInitializer {
 					yaw += yawDelta;
 				}
 
-				changeElytraLook(0, yaw, 0, ModConfig.INSTANCE.desktopSensitivity);
-
-
+				//For banking, we swap yaw-roll manually here
 				double roll = 0;
 				if (ModConfig.INSTANCE.switchRollAndYaw) {
 					roll = yaw;
