@@ -14,5 +14,13 @@
   "text.autoconfig.do-a-barrel-roll.option.controllerSensitivity.@Tooltip": "Only applicable when MidnightControls is installed.",
   "text.autoconfig.do-a-barrel-roll.option.controllerSensitivity.pitch": "Pitch",
   "text.autoconfig.do-a-barrel-roll.option.controllerSensitivity.yaw": "Yaw",
-  "text.autoconfig.do-a-barrel-roll.option.controllerSensitivity.roll": "Roll"
+  "text.autoconfig.do-a-barrel-roll.option.controllerSensitivity.roll": "Roll",
+  "text.autoconfig.do-a-barrel-roll.option.responsiveness": "Input responsiveness",
+  "text.autoconfig.do-a-barrel-roll.option.responsiveness.@Tooltip": "Higher values make the fly more responsive",
+  "text.autoconfig.do-a-barrel-roll.option.responsiveness.pitch": "Pitch",
+  "text.autoconfig.do-a-barrel-roll.option.responsiveness.yaw": "Yaw",
+  "text.autoconfig.do-a-barrel-roll.option.responsiveness.roll": "Roll",
+  "text.autoconfig.do-a-barrel-roll.option.enableBanking": "Enable banking",
+  "text.autoconfig.do-a-barrel-roll.option.enableBanking.@Tooltip": "Roll left to slowly turn left.",
+  "text.autoconfig.do-a-barrel-roll.option.bankingStrength": "Banking strength"
 }
