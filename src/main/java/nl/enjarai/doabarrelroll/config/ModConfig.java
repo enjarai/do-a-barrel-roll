@@ -25,4 +25,10 @@ public class ModConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Gui.CollapsibleObject
     public Sensitivity controllerSensitivity = new Sensitivity(1, 0.4, 1);
+
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public Sensitivity smoothing = new Sensitivity(1, 1, 1);
+
+
 }

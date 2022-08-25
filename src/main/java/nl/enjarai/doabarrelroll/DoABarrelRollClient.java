@@ -56,7 +56,7 @@ public class DoABarrelRollClient implements ClientModInitializer {
 
 		landingLerp = 0;
 
-		changeElytraLook(cursorDeltaY, 0, cursorDeltaX, ModConfig.INSTANCE.desktopSensitivity);
+		changeElytraLook(cursorDeltaY, 0, cursorDeltaX, ModConfig.INSTANCE.desktopSensitivity, ModConfig.INSTANCE.smoothing);
 	}
 	
 	public static void onWorldRender(MinecraftClient client, float tickDelta, long limitTime, MatrixStack matrix) {
@@ -68,7 +68,7 @@ public class DoABarrelRollClient implements ClientModInitializer {
 		} else {
 
 			var yawDelta = 25f;
-			var yaw = 0;
+			var yaw = 0f;
 
 			// Strafe buttons
 			if (client.options.leftKey.isPressed()) {
@@ -78,7 +78,18 @@ public class DoABarrelRollClient implements ClientModInitializer {
 				yaw += yawDelta;
 			}
 
-			changeElytraLook(0, yaw, 0, ModConfig.INSTANCE.desktopSensitivity);
+			//Realistic roll keep adding to yaw.
+			if (!client.isPaused()) {
+				double roll = -Math.acos(left.dotProduct(ElytraMath.getAssumedLeft(client.player.getYaw())));
+				if (left.getY() < 0) roll *= -1;
+				var change = Math.sin(roll);
+
+				var scalar = 10 * ElytraMath.sigmoid(client.player.getVelocity().length()*2-2);
+				change *= scalar;
+
+				yaw += change;
+			}
+			changeElytraLook(0, yaw, 0, ModConfig.INSTANCE.desktopSensitivity, ModConfig.INSTANCE.smoothing);
 
 		}
 
@@ -99,7 +110,7 @@ public class DoABarrelRollClient implements ClientModInitializer {
 		rollSmoother.clear();
 	}
 
-	public static void changeElytraLook(double pitch, double yaw, double roll, Sensitivity sensitivity) {
+	public static void changeElytraLook(double pitch, double yaw, double roll, Sensitivity sensitivity, Sensitivity smoothing) {
 		var player = MinecraftClient.getInstance().player;
 		if (player == null) return;
 
@@ -109,9 +120,9 @@ public class DoABarrelRollClient implements ClientModInitializer {
 		lastLookUpdate = time;
 
 		// smooth the look changes
-		pitch = pitchSmoother.smooth(pitch, sensitivity.pitch * delta);
-		yaw = yawSmoother.smooth(yaw, sensitivity.yaw * delta);
-		roll = rollSmoother.smooth(roll, sensitivity.roll * delta);
+		pitch = pitchSmoother.smooth(pitch, smoothing.pitch * delta);
+		yaw = yawSmoother.smooth(yaw, smoothing.yaw * delta);
+		roll = rollSmoother.smooth(roll, smoothing.roll * delta);
 
 		// apply the look changes
 		if (ModConfig.INSTANCE.switchRollAndYaw) {

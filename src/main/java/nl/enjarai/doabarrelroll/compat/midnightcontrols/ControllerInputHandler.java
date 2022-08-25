@@ -22,15 +22,15 @@ public class ControllerInputHandler {
             // calculate the smoothing and apply the rotation
             if (axis == GLFW_GAMEPAD_AXIS_RIGHT_X) {
                 DoABarrelRollClient.changeElytraLook(0, 0, rotationDelta * MidnightControlsConfig.getRightXAxisSign(),
-                        ModConfig.INSTANCE.controllerSensitivity);
+                        ModConfig.INSTANCE.controllerSensitivity, ModConfig.INSTANCE.smoothing);
 
             } else if (axis == GLFW_GAMEPAD_AXIS_RIGHT_Y) {
                 DoABarrelRollClient.changeElytraLook(rotationDelta * MidnightControlsConfig.getRightYAxisSign(), 0, 0,
-                        ModConfig.INSTANCE.controllerSensitivity);
+                        ModConfig.INSTANCE.controllerSensitivity, ModConfig.INSTANCE.smoothing);
 
             } else if (axis == GLFW_GAMEPAD_AXIS_LEFT_X) {
                 DoABarrelRollClient.changeElytraLook(0, rotationDelta, 0,
-                        ModConfig.INSTANCE.controllerSensitivity);
+                        ModConfig.INSTANCE.controllerSensitivity, ModConfig.INSTANCE.smoothing);
 
             }
 
