@@ -28,7 +28,9 @@ public class ModConfig implements ConfigData {
 
 
     @ConfigEntry.Gui.CollapsibleObject
-    public Sensitivity smoothing = new Sensitivity(1, 1, 1);
+    public Sensitivity responsiveness = new Sensitivity(4, 4, 6);
 
+    public boolean enableBanking = true;
 
+    public float bankingStrength = 1.3f;
 }

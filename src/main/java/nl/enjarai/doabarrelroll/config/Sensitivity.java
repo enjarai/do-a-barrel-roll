@@ -10,4 +10,8 @@ public class Sensitivity {
         this.yaw = yaw;
         this.roll = roll;
     }
+
+    public static Sensitivity identity() {
+        return new Sensitivity(1, 1, 1);
+    }
 }

@@ -56,7 +56,7 @@ public class DoABarrelRollClient implements ClientModInitializer {
 
 		landingLerp = 0;
 
-		changeElytraLook(cursorDeltaY, 0, cursorDeltaX, ModConfig.INSTANCE.desktopSensitivity, ModConfig.INSTANCE.smoothing);
+		changeElytraLook(cursorDeltaY, 0, cursorDeltaX, ModConfig.INSTANCE.desktopSensitivity);
 	}
 	
 	public static void onWorldRender(MinecraftClient client, float tickDelta, long limitTime, MatrixStack matrix) {
@@ -67,8 +67,9 @@ public class DoABarrelRollClient implements ClientModInitializer {
 
 		} else {
 
-			var yawDelta = 25f;
-			var yaw = 0f;
+
+			var yawDelta = 25f * (ModConfig.INSTANCE.switchRollAndYaw ? ModConfig.INSTANCE.responsiveness.roll : ModConfig.INSTANCE.responsiveness.yaw);
+			double yaw = 0;
 
 			// Strafe buttons
 			if (client.options.leftKey.isPressed()) {
@@ -78,18 +79,25 @@ public class DoABarrelRollClient implements ClientModInitializer {
 				yaw += yawDelta;
 			}
 
-			//Realistic roll keep adding to yaw.
-			if (!client.isPaused()) {
-				double roll = -Math.acos(left.dotProduct(ElytraMath.getAssumedLeft(client.player.getYaw())));
-				if (left.getY() < 0) roll *= -1;
-				var change = Math.sin(roll);
+			double roll = 0;
+			if (ModConfig.INSTANCE.switchRollAndYaw) {
+				roll = yaw;
+				yaw = 0;
+			}
 
-				var scalar = 10 * ElytraMath.sigmoid(client.player.getVelocity().length()*2-2);
+			//Realistic roll keep adding to yaw.
+			if (ModConfig.INSTANCE.enableBanking && !client.isPaused()) {
+				double currentRoll = -Math.acos(left.dotProduct(ElytraMath.getAssumedLeft(client.player.getYaw())));
+				if (left.getY() < 0) currentRoll *= -1;
+				var change = Math.sin(currentRoll);
+
+				var scalar = 10 * ElytraMath.sigmoid(client.player.getVelocity().length()*2-2) * ModConfig.INSTANCE.bankingStrength;
 				change *= scalar;
 
 				yaw += change;
 			}
-			changeElytraLook(0, yaw, 0, ModConfig.INSTANCE.desktopSensitivity, ModConfig.INSTANCE.smoothing);
+			//Change with identity sensitivity
+			changeElytraLook(0, yaw, roll, Sensitivity.identity(), false);
 
 		}
 
@@ -110,7 +118,22 @@ public class DoABarrelRollClient implements ClientModInitializer {
 		rollSmoother.clear();
 	}
 
-	public static void changeElytraLook(double pitch, double yaw, double roll, Sensitivity sensitivity, Sensitivity smoothing) {
+	public static void changeElytraLook(double pitch, double yaw, double roll, Sensitivity sensitivity, boolean allowRollYawSwitch) {
+		// apply the look changes
+		if (allowRollYawSwitch && ModConfig.INSTANCE.switchRollAndYaw) {
+			changeElytraLookSmoothed(pitch, roll, yaw, sensitivity);
+		} else {
+			changeElytraLookSmoothed(pitch, yaw, roll, sensitivity);
+		}
+	}
+
+	//Default parameter function
+	public static void changeElytraLook(double pitch, double yaw, double roll, Sensitivity sensitivity) {
+		changeElytraLook(pitch, yaw, roll, sensitivity, true);
+	}
+
+	// with this the sensitivity won't be swapped by the option
+	public static void changeElytraLookSmoothed(double pitch, double yaw, double roll, Sensitivity sensitivity) {
 		var player = MinecraftClient.getInstance().player;
 		if (player == null) return;
 
@@ -120,18 +143,15 @@ public class DoABarrelRollClient implements ClientModInitializer {
 		lastLookUpdate = time;
 
 		// smooth the look changes
-		pitch = pitchSmoother.smooth(pitch, smoothing.pitch * delta);
-		yaw = yawSmoother.smooth(yaw, smoothing.yaw * delta);
-		roll = rollSmoother.smooth(roll, smoothing.roll * delta);
-
-		// apply the look changes
-		if (ModConfig.INSTANCE.switchRollAndYaw) {
-			ElytraMath.changeElytraLookDirectly(player, pitch, roll, yaw, sensitivity);
-		} else {
-			ElytraMath.changeElytraLookDirectly(player, pitch, yaw, roll, sensitivity);
-		}
+		pitch *= sensitivity.pitch;
+		yaw *= sensitivity.yaw;
+		roll *= sensitivity.roll;
+		pitch = pitchSmoother.smooth(pitch, ModConfig.INSTANCE.responsiveness.pitch * delta);
+		yaw = yawSmoother.smooth(yaw, ModConfig.INSTANCE.responsiveness.yaw * delta);
+		roll = rollSmoother.smooth(roll, ModConfig.INSTANCE.responsiveness.roll * delta);
+		ElytraMath.changeElytraLookDirectly(player, pitch, yaw, roll);
 	}
-	
+
 	public static boolean isFallFlying() {
 		var player = MinecraftClient.getInstance().player;
 		return player != null && player.isFallFlying();
