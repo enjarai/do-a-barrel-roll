@@ -1,5 +1,6 @@
 {
   "text.autoconfig.do-a-barrel-roll.title": "§lDo a Barrel Roll",
+  "text.autoconfig.do-a-barrel-roll.option.modEnabled": "Mod enabled",
   "text.autoconfig.do-a-barrel-roll.option.switchRollAndYaw": "Switch roll and yaw",
   "text.autoconfig.do-a-barrel-roll.option.switchRollAndYaw.@Tooltip": "Switch the roll and yaw axis, not recommended but might make flying easier for some people.",
   "text.autoconfig.do-a-barrel-roll.option.momentumBasedMouse": "Use momentum based camera",

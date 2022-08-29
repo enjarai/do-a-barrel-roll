@@ -17,6 +17,8 @@ public class ModConfig implements ConfigData {
         INSTANCE = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
     }
 
+    public boolean modEnabled = true;
+
     @ConfigEntry.Gui.Tooltip
     public boolean switchRollAndYaw = false;
 

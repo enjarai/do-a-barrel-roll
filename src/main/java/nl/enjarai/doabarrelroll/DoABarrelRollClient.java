@@ -44,7 +44,7 @@ public class DoABarrelRollClient implements ClientModInitializer {
 		lastLerpUpdate = time;
 
 		// smoothly lerp left vector to the assumed upright left if not in flight
-		if (!player.isFallFlying()) {
+		if (!isFallFlying()) {
 
 			landingLerp = MathHelper.lerp(MathHelper.clamp(lerpDelta * 2, 0, 1), landingLerp, 1);
 
@@ -86,7 +86,7 @@ public class DoABarrelRollClient implements ClientModInitializer {
 	
 	public static void onWorldRender(MinecraftClient client, float tickDelta, long limitTime, MatrixStack matrix) {
 
-		if (client.player == null || !client.player.isFallFlying()) {
+		if (!isFallFlying()) {
 
 			clearValues();
 
@@ -134,7 +134,7 @@ public class DoABarrelRollClient implements ClientModInitializer {
 			}
 		}
 
-		if (landingLerp < 1) {
+		if (client.player != null && landingLerp < 1) {
 
 			// calculate the camera angle and apply it
 			double angle = -Math.acos(left.dotProduct(ElytraMath.getAssumedLeft(client.player.getYaw()))) * ElytraMath.TODEG;
@@ -145,7 +145,7 @@ public class DoABarrelRollClient implements ClientModInitializer {
 	}
 
 	public static void onRenderCrosshair(MatrixStack matrices, int scaledWidth, int scaledHeight) {
-		if (!DoABarrelRollClient.isFallFlying() || !ModConfig.INSTANCE.momentumBasedMouse || !ModConfig.INSTANCE.showMomentumWidget) return;
+		if (!isFallFlying() || !ModConfig.INSTANCE.momentumBasedMouse || !ModConfig.INSTANCE.showMomentumWidget) return;
 
 		MomentumCrosshairWidget.render(matrices, scaledWidth, scaledHeight, mouseTurnVec);
 	}
@@ -207,6 +207,6 @@ public class DoABarrelRollClient implements ClientModInitializer {
 
 	public static boolean isFallFlying() {
 		var player = MinecraftClient.getInstance().player;
-		return player != null && player.isFallFlying();
+		return player != null && player.isFallFlying() && ModConfig.INSTANCE.modEnabled;
 	}
 }

@@ -1,2 +1,1 @@
-- Fixed camera drifting while game is paused (#5)
-- Added momentum based camera movement option
+- Add global toggle config option.
