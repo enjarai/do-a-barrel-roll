@@ -13,7 +13,7 @@ import net.minecraft.text.Text;
 import nl.enjarai.doabarrelroll.config.ActivationBehaviour;
 import nl.enjarai.doabarrelroll.config.ModConfig;
 
-public class YACLCompat {
+public class YACLImplementation {
     public static Screen generateConfigScreen(Screen parent) {
         return YetAnotherConfigLib.createBuilder()
                 .title(getText("title"))
