@@ -74,11 +74,11 @@ dependencies {
         exclude group: "net.fabricmc.fabric-api"
     }
 
-    modImplementation("dev.isxander.yacl:yet-another-config-lib-fabric:${project.yacl_version}") {
+    modCompileOnly("dev.isxander.yacl:yet-another-config-lib-fabric:${project.yacl_version}") {
         exclude group: "net.fabricmc"
     }
 
-    modImplementation("dev.isxander:controlify:${project.controlify_version}:fabric-1.19.4") {
+    modCompileOnly("dev.isxander:controlify:${project.controlify_version}:fabric-1.19.4") {
         exclude group: "net.fabricmc"
         exclude group: "maven.modrinth"
     }

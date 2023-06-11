@@ -3,16 +3,8 @@ package nl.enjarai.doabarrelroll.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dev.isxander.yacl.api.ConfigCategory;
-import dev.isxander.yacl.api.Option;
-import dev.isxander.yacl.api.OptionGroup;
-import dev.isxander.yacl.api.YetAnotherConfigLib;
-import dev.isxander.yacl.gui.controllers.TickBoxController;
-import dev.isxander.yacl.gui.controllers.cycling.EnumController;
-import dev.isxander.yacl.gui.controllers.slider.DoubleSliderController;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
 import nl.enjarai.doabarrelroll.DoABarrelRollClient;
@@ -81,150 +73,6 @@ public class ModConfig {
         Sensitivity controller = new Sensitivity();
     }
 
-
-    public Screen generateConfigScreen(Screen parent) {
-        return YetAnotherConfigLib.createBuilder()
-                .title(getText("title"))
-                .category(ConfigCategory.createBuilder()
-                        .name(getText("general"))
-                        .option(getBooleanOption("general", "mod_enabled", false)
-                                .binding(true, () -> general.mod_enabled, value -> general.mod_enabled = value)
-                                .build())
-                        .group(OptionGroup.createBuilder()
-                                .name(getText("controls"))
-                                .option(getBooleanOption("controls", "switch_roll_and_yaw", true)
-                                        .binding(false, () -> general.controls.switch_roll_and_yaw, value -> general.controls.switch_roll_and_yaw = value)
-                                        .build())
-                                .option(getBooleanOption("controls", "invert_pitch", false)
-                                        .binding(false, () -> general.controls.invert_pitch, value -> general.controls.invert_pitch = value)
-                                        .build())
-                                .option(getBooleanOption("controls", "momentum_based_mouse", true)
-                                        .binding(false, () -> general.controls.momentum_based_mouse, value -> general.controls.momentum_based_mouse = value)
-                                        .build())
-                                .option(getOption(ActivationBehaviour.class, "controls", "activation_behaviour", true)
-                                        .controller(EnumController::new)
-                                        .binding(ActivationBehaviour.VANILLA, () -> general.controls.activation_behaviour, value -> general.controls.activation_behaviour = value)
-                                        .build())
-                                .build())
-                        .group(OptionGroup.createBuilder()
-                                .name(getText("hud"))
-                                .option(getBooleanOption("hud", "show_horizon", true)
-                                        .binding(false, () -> general.hud.show_horizon, value -> general.hud.show_horizon = value)
-                                        .build())
-                                .option(getBooleanOption("controls", "show_momentum_widget", true)
-                                        .binding(true, () -> general.controls.show_momentum_widget, value -> general.controls.show_momentum_widget = value)
-                                        .build())
-                                .build())
-                        .group(OptionGroup.createBuilder()
-                                .name(getText("banking"))
-                                .option(getBooleanOption("banking", "enable_banking", true)
-                                        .binding(true, () -> general.banking.enable_banking, value -> general.banking.enable_banking = value)
-                                        .build())
-                                .option(getOption(Double.class, "banking", "banking_strength", false)
-                                        .controller(option -> new DoubleSliderController(option, 0.0, 100.0, 1.0))
-                                        .binding(20.0, () -> general.banking.banking_strength, value -> general.banking.banking_strength = value)
-                                        .build())
-                                .build())
-                        .group(OptionGroup.createBuilder()
-                                .name(getText("thrust"))
-                                .collapsed(true)
-                                .option(getBooleanOption("thrust", "enable_thrust", true)
-                                        .binding(false, () -> general.thrust.enable_thrust, value -> general.thrust.enable_thrust = value)
-                                        .build())
-                                .option(getOption(Double.class, "thrust", "max_thrust", true)
-                                        .controller(option -> new DoubleSliderController(option, 0.1, 10.0, 0.1))
-                                        .binding(2.0, () -> general.thrust.max_thrust, value -> general.thrust.max_thrust = value)
-                                        .build())
-                                .option(getOption(Double.class, "thrust", "thrust_acceleration", true)
-                                        .controller(option -> new DoubleSliderController(option, 0.1, 1.0, 0.1))
-                                        .binding(0.1, () -> general.thrust.thrust_acceleration, value -> general.thrust.thrust_acceleration = value)
-                                        .build())
-                                .option(getBooleanOption("thrust", "thrust_particles", false)
-                                        .binding(true, () -> general.thrust.thrust_particles, value -> general.thrust.thrust_particles = value)
-                                        .build())
-                                .build())
-                        .build())
-                .category(ConfigCategory.createBuilder()
-                        .name(getText("sensitivity"))
-                        .group(OptionGroup.createBuilder()
-                                .name(getText("smoothing"))
-                                .option(getBooleanOption("smoothing", "smoothing_enabled", false)
-                                        .binding(true, () -> sensitivity.smoothing.smoothing_enabled, value -> sensitivity.smoothing.smoothing_enabled = value)
-                                        .build())
-                                .option(getOption(Double.class, "smoothing", "smoothing_pitch", false)
-                                        .controller(option -> new DoubleSliderController(option, 0.1, 5.0, 0.1))
-                                        .binding(1.0, () -> sensitivity.smoothing.smoothing_pitch, value -> sensitivity.smoothing.smoothing_pitch = value)
-                                        .build())
-                                .option(getOption(Double.class, "smoothing", "smoothing_yaw", false)
-                                        .controller(option -> new DoubleSliderController(option, 0.1, 5.0, 0.1))
-                                        .binding(0.4, () -> sensitivity.smoothing.smoothing_yaw, value -> sensitivity.smoothing.smoothing_yaw = value)
-                                        .build())
-                                .option(getOption(Double.class, "smoothing", "smoothing_roll", false)
-                                        .controller(option -> new DoubleSliderController(option, 0.1, 5.0, 0.1))
-                                        .binding(1.0, () -> sensitivity.smoothing.smoothing_roll, value -> sensitivity.smoothing.smoothing_roll = value)
-                                        .build())
-                                .build())
-                        .group(OptionGroup.createBuilder()
-                                .name(getText("desktop"))
-                                .option(getOption(Double.class, "desktop", "pitch", false)
-                                        .controller(option -> new DoubleSliderController(option, 0.1, 10.0, 0.1))
-                                        .binding(1.0, () -> sensitivity.desktop.pitch, value -> sensitivity.desktop.pitch = value)
-                                        .build())
-                                .option(getOption(Double.class, "desktop", "yaw", false)
-                                        .controller(option -> new DoubleSliderController(option, 0.1, 10.0, 0.1))
-                                        .binding(0.4, () -> sensitivity.desktop.yaw, value -> sensitivity.desktop.yaw = value)
-                                        .build())
-                                .option(getOption(Double.class, "desktop", "roll", false)
-                                        .controller(option -> new DoubleSliderController(option, 0.1, 10.0, 0.1))
-                                        .binding(1.0, () -> sensitivity.desktop.roll, value -> sensitivity.desktop.roll = value)
-                                        .build())
-                                .build())
-                        .group(OptionGroup.createBuilder()
-                                .name(getText("controller"))
-                                .collapsed(!(FabricLoader.getInstance().isModLoaded("controlify") || FabricLoader.getInstance().isModLoaded("midnightcontrols")))
-                                .tooltip(getText("controller.description"))
-                                .option(getOption(Double.class, "controller", "pitch", false)
-                                        .controller(option -> new DoubleSliderController(option, 0.1, 10.0, 0.1))
-                                        .binding(1.0, () -> sensitivity.controller.pitch, value -> sensitivity.controller.pitch = value)
-                                        .build())
-                                .option(getOption(Double.class, "controller", "yaw", false)
-                                        .controller(option -> new DoubleSliderController(option, 0.1, 10.0, 0.1))
-                                        .binding(0.4, () -> sensitivity.controller.yaw, value -> sensitivity.controller.yaw = value)
-                                        .build())
-                                .option(getOption(Double.class, "controller", "roll", false)
-                                        .controller(option -> new DoubleSliderController(option, 0.1, 10.0, 0.1))
-                                        .binding(1.0, () -> sensitivity.controller.roll, value -> sensitivity.controller.roll = value)
-                                        .build())
-                                .build())
-                        .build())
-                .save(this::save)
-                .build()
-                .generateScreen(parent);
-    }
-
-    private <T> Option.Builder<T> getOption(Class<T> clazz, String category, String key, boolean description) {
-        Option.Builder<T> builder = Option.createBuilder(clazz)
-                .name(getText(category, key));
-        if (description) {
-            builder.tooltip(getText(category, key + ".description"));
-        }
-        return builder;
-    }
-
-    private Option.Builder<Boolean> getBooleanOption(String category, String key, boolean description) {
-        return getOption(Boolean.class, category, key, description)
-                .controller(TickBoxController::new);
-    }
-
-    private Text getText(String category, String key) {
-        return Text.translatable("config.do_a_barrel_roll." + category + "." + key);
-    }
-
-    private Text getText(String key) {
-        return Text.translatable("config.do_a_barrel_roll." + key);
-    }
-
-
     public boolean getModEnabled() {
         return general.mod_enabled;
     }
@@ -282,6 +130,18 @@ public class ModConfig {
         return sensitivity.smoothing.smoothing_enabled;
     }
 
+    public double getSmoothingPitch() {
+        return sensitivity.smoothing.smoothing_pitch;
+    }
+
+    public double getSmoothingYaw() {
+        return sensitivity.smoothing.smoothing_yaw;
+    }
+
+    public double getSmoothingRoll() {
+        return sensitivity.smoothing.smoothing_roll;
+    }
+
     public Sensitivity getSmoothing() {
         return new Sensitivity(
                 sensitivity.smoothing.smoothing_pitch,
@@ -294,8 +154,32 @@ public class ModConfig {
         return sensitivity.desktop;
     }
 
+    public double getDesktopPitch() {
+        return sensitivity.desktop.pitch;
+    }
+
+    public double getDesktopYaw() {
+        return sensitivity.desktop.yaw;
+    }
+
+    public double getDesktopRoll() {
+        return sensitivity.desktop.roll;
+    }
+
     public Sensitivity getControllerSensitivity() {
         return sensitivity.controller;
+    }
+
+    public double getControllerPitch() {
+        return sensitivity.controller.pitch;
+    }
+
+    public double getControllerYaw() {
+        return sensitivity.controller.yaw;
+    }
+
+    public double getControllerRoll() {
+        return sensitivity.controller.roll;
     }
 
     public void setModEnabled(boolean enabled) {
@@ -354,12 +238,48 @@ public class ModConfig {
         sensitivity.smoothing.smoothing_enabled = enabled;
     }
 
+    public void setSmoothingPitch(double pitch) {
+        sensitivity.smoothing.smoothing_pitch = pitch;
+    }
+
+    public void setSmoothingYaw(double yaw) {
+        sensitivity.smoothing.smoothing_yaw = yaw;
+    }
+
+    public void setSmoothingRoll(double roll) {
+        sensitivity.smoothing.smoothing_roll = roll;
+    }
+
     public void setDesktopSensitivity(Sensitivity sensitivity) {
         this.sensitivity.desktop = sensitivity;
     }
 
+    public void setDesktopPitch(double pitch) {
+        sensitivity.desktop.pitch = pitch;
+    }
+
+    public void setDesktopYaw(double yaw) {
+        sensitivity.desktop.yaw = yaw;
+    }
+
+    public void setDesktopRoll(double roll) {
+        sensitivity.desktop.roll = roll;
+    }
+
     public void setControllerSensitivity(Sensitivity sensitivity) {
         this.sensitivity.controller = sensitivity;
+    }
+
+    public void setControllerPitch(double pitch) {
+        sensitivity.controller.pitch = pitch;
+    }
+
+    public void setControllerYaw(double yaw) {
+        sensitivity.controller.yaw = yaw;
+    }
+
+    public void setControllerRoll(double roll) {
+        sensitivity.controller.roll = roll;
     }
 
     public void save() {

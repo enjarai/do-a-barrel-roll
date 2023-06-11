@@ -1,16 +1,26 @@
 package nl.enjarai.doabarrelroll.config;
 
-import dev.isxander.yacl.api.NameableEnum;
 import net.minecraft.text.Text;
+import net.minecraft.util.TranslatableOption;
 
-public enum ActivationBehaviour implements NameableEnum {
+public enum ActivationBehaviour implements TranslatableOption {
     VANILLA,
     TRIPLE_JUMP,
     HYBRID,
     HYBRID_TOGGLE;
 
     @Override
-    public Text getDisplayName() {
-        return Text.translatable("config.do_a_barrel_roll.controls.activation_behaviour." + this.name().toLowerCase());
+    public int getId() {
+        return this.ordinal();
+    }
+
+    @Override
+    public String getTranslationKey() {
+        return "config.do_a_barrel_roll.controls.activation_behaviour." + this.name().toLowerCase();
+    }
+
+    @Override
+    public Text getText() {
+        return Text.translatable(getTranslationKey());
     }
 }

@@ -46,6 +46,8 @@
   "config.do_a_barrel_roll.controller.pitch": "Pitch",
   "config.do_a_barrel_roll.controller.yaw": "Yaw",
   "config.do_a_barrel_roll.controller.roll": "Roll",
+  "config.do_a_barrel_roll.yacl.missing": "Yet Another Config Lib is not installed",
+  "config.do_a_barrel_roll.yacl.missing.message": "YACL 2 is required to edit the config in game, would you like to install YACL 2?",
 
   "category.do_a_barrel_roll.do_a_barrel_roll": "Do a Barrel Roll",
   "key.do_a_barrel_roll.toggle_enabled": "Toggle Enabled",
