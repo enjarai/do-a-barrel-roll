@@ -7,4 +7,4 @@ jobs:
     uses: ./.github/workflows/build.yml
     with:
       branch: ${{ github.head_ref || github.ref_name }}
-      java_version: 17
+      java_version: 21
