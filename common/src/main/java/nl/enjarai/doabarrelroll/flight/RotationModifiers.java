@@ -93,15 +93,15 @@ public class RotationModifiers {
         return (rotationInstant, context) -> {
             if (Double.isNaN(rotationInstant.pitch())) {
                 rotationInstant = RotationInstant.of(0, rotationInstant.yaw(), rotationInstant.roll());
-                DoABarrelRoll.LOGGER.warn("NaN found in pitch for " + name + ", setting to 0 as fallback");
+                DoABarrelRoll.LOGGER.warn("NaN found in pitch for {}, setting to 0 as fallback", name);
             }
             if (Double.isNaN(rotationInstant.yaw())) {
                 rotationInstant = RotationInstant.of(rotationInstant.pitch(), 0, rotationInstant.roll());
-                DoABarrelRoll.LOGGER.warn("NaN found in yaw for " + name + ", setting to 0 as fallback");
+                DoABarrelRoll.LOGGER.warn("NaN found in yaw for {}, setting to 0 as fallback", name);
             }
             if (Double.isNaN(rotationInstant.roll())) {
                 rotationInstant = RotationInstant.of(rotationInstant.pitch(), rotationInstant.yaw(), 0);
-                DoABarrelRoll.LOGGER.warn("NaN found in roll for " + name + ", setting to 0 as fallback");
+                DoABarrelRoll.LOGGER.warn("NaN found in roll for {}, setting to 0 as fallback", name);
             }
             return rotationInstant;
         };
