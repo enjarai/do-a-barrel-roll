@@ -1,10 +1,10 @@
 package nl.enjarai.doabarrelroll.flight;
 
+import java.util.HashMap;
+import java.util.Map;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Smoother;
 import nl.enjarai.doabarrelroll.DoABarrelRoll;
-import nl.enjarai.doabarrelroll.DoABarrelRollClient;
 import nl.enjarai.doabarrelroll.ModKeybindings;
 import nl.enjarai.doabarrelroll.api.event.RollContext;
 import nl.enjarai.doabarrelroll.api.rotation.RotationInstant;
@@ -12,18 +12,15 @@ import nl.enjarai.doabarrelroll.config.ModConfig;
 import nl.enjarai.doabarrelroll.config.Sensitivity;
 import nl.enjarai.doabarrelroll.math.MagicNumbers;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class RotationModifiers {
     public static final double ROLL_REORIENT_CUTOFF = Math.sqrt(10.0 / 3.0);
 
     public static RollContext.ConfiguresRotation buttonControls(double power) {
         return (rotationInstant, context) -> {
             var delta = power * context.getRenderDelta();
-            var pitch = 0;
-            var yaw = 0;
-            var roll = 0;
+            var pitch = 0.0;
+            var yaw = 0.0;
+            var roll = 0.0;
 
             if (ModKeybindings.PITCH_UP.isPressed()) {
                 pitch -= delta;
