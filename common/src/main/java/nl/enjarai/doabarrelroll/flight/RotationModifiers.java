@@ -92,22 +92,6 @@ public class RotationModifiers {
         return rotationInstant.add(0, 0, -rollDelta * strength * delta);
     }
 
-    public static RotationInstant manageThrottle(RotationInstant rotationInstant, RollContext context) {
-        var delta = context.getRenderDelta();
-
-        if (ModKeybindings.THRUST_FORWARD.isPressed()) {
-            DoABarrelRollClient.throttle += 0.1 * delta;
-        } else if (ModKeybindings.THRUST_BACKWARD.isPressed()) {
-            DoABarrelRollClient.throttle -= 0.1 * delta;
-        } else {
-            DoABarrelRollClient.throttle -= DoABarrelRollClient.throttle * 0.95 * delta;
-        }
-
-        DoABarrelRollClient.throttle = MathHelper.clamp(DoABarrelRollClient.throttle, 0, ModConfig.INSTANCE.getMaxThrust());
-
-        return rotationInstant;
-    }
-
     public static RollContext.ConfiguresRotation fixNaN(String name) {
         return (rotationInstant, context) -> {
             if (Double.isNaN(rotationInstant.pitch())) {

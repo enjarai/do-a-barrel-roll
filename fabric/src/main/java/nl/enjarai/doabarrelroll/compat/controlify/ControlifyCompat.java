@@ -67,15 +67,6 @@ public class ControlifyCompat implements ControlifyEntrypoint {
         return forward - backward;
     }
 
-    public static RotationInstant manageThrottle(RotationInstant rotationInstant, RollContext context) {
-        var delta = context.getRenderDelta();
-
-        DoABarrelRollClient.throttle += getThrustModifier() * delta;
-        DoABarrelRollClient.throttle = MathHelper.clamp(DoABarrelRollClient.throttle, 0, ModConfig.INSTANCE.getMaxThrust());
-
-        return rotationInstant;
-    }
-
     @Override
     public void onControlifyPreInit(ControlifyApi controlifyApi) {
         var bindings = ControlifyBindApi.get();
@@ -138,9 +129,6 @@ public class ControlifyCompat implements ControlifyEntrypoint {
                 .addKeyCorrelation(ModKeybindings.THRUST_BACKWARD)
         );
 
-        RollEvents.EARLY_CAMERA_MODIFIERS.register(context -> context
-                .useModifier(ControlifyCompat::manageThrottle, ModConfig.INSTANCE::getEnableThrust),
-                8, DoABarrelRollClient::isFallFlying);
         RollEvents.LATE_CAMERA_MODIFIERS.register(context -> context
                 .useModifier(this::applyToRotation),
                 5, DoABarrelRollClient::isFallFlying);
