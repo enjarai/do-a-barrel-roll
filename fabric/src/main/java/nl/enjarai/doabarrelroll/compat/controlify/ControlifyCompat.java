@@ -7,7 +7,6 @@ import dev.isxander.controlify.api.entrypoint.ControlifyEntrypoint;
 import dev.isxander.controlify.api.event.ControlifyEvents;
 import dev.isxander.controlify.bindings.BindContext;
 import net.minecraft.text.Text;
-import net.minecraft.util.math.MathHelper;
 import nl.enjarai.doabarrelroll.DoABarrelRoll;
 import nl.enjarai.doabarrelroll.DoABarrelRollClient;
 import nl.enjarai.doabarrelroll.ModKeybindings;
@@ -65,15 +64,6 @@ public class ControlifyCompat implements ControlifyEntrypoint {
         float forward = THRUST_FORWARD.on(controller).analogueNow();
         float backward = THRUST_BACKWARD.on(controller).analogueNow();
         return forward - backward;
-    }
-
-    public static RotationInstant manageThrottle(RotationInstant rotationInstant, RollContext context) {
-        var delta = context.getRenderDelta();
-
-        DoABarrelRollClient.throttle += getThrustModifier() * delta;
-        DoABarrelRollClient.throttle = MathHelper.clamp(DoABarrelRollClient.throttle, 0, ModConfig.INSTANCE.getMaxThrust());
-
-        return rotationInstant;
     }
 
     @Override
@@ -138,9 +128,6 @@ public class ControlifyCompat implements ControlifyEntrypoint {
                 .addKeyCorrelation(ModKeybindings.THRUST_BACKWARD)
         );
 
-        RollEvents.EARLY_CAMERA_MODIFIERS.register(context -> context
-                .useModifier(ControlifyCompat::manageThrottle, ModConfig.INSTANCE::getEnableThrust),
-                8, DoABarrelRollClient::isFallFlying);
         RollEvents.LATE_CAMERA_MODIFIERS.register(context -> context
                 .useModifier(this::applyToRotation),
                 5, DoABarrelRollClient::isFallFlying);

@@ -18,14 +18,12 @@ public class DoABarrelRollClient {
     public static final Smoother YAW_SMOOTHER = new Smoother();
     public static final Smoother ROLL_SMOOTHER = new Smoother();
     public static final RollGroup FALL_FLYING_GROUP = RollGroup.of(DoABarrelRoll.id("fall_flying"));
-    public static double throttle = 0;
 
     public static void init() {
         FALL_FLYING_GROUP.trueIf(DoABarrelRollClient::isFallFlying);
 
         // Keyboard modifiers
         RollEvents.EARLY_CAMERA_MODIFIERS.register(context -> context
-                .useModifier(RotationModifiers::manageThrottle, ModConfig.INSTANCE::getEnableThrust)
                 .useModifier(RotationModifiers.buttonControls(1800)),
                 2000, FALL_FLYING_GROUP);
 
@@ -57,7 +55,6 @@ public class DoABarrelRollClient {
         PITCH_SMOOTHER.clear();
         YAW_SMOOTHER.clear();
         ROLL_SMOOTHER.clear();
-        throttle = 0;
     }
 
     public static boolean isFallFlying() {

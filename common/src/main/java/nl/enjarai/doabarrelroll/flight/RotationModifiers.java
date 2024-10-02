@@ -1,10 +1,10 @@
 package nl.enjarai.doabarrelroll.flight;
 
+import java.util.HashMap;
+import java.util.Map;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Smoother;
 import nl.enjarai.doabarrelroll.DoABarrelRoll;
-import nl.enjarai.doabarrelroll.DoABarrelRollClient;
 import nl.enjarai.doabarrelroll.ModKeybindings;
 import nl.enjarai.doabarrelroll.api.event.RollContext;
 import nl.enjarai.doabarrelroll.api.rotation.RotationInstant;
@@ -12,18 +12,15 @@ import nl.enjarai.doabarrelroll.config.ModConfig;
 import nl.enjarai.doabarrelroll.config.Sensitivity;
 import nl.enjarai.doabarrelroll.math.MagicNumbers;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class RotationModifiers {
     public static final double ROLL_REORIENT_CUTOFF = Math.sqrt(10.0 / 3.0);
 
     public static RollContext.ConfiguresRotation buttonControls(double power) {
         return (rotationInstant, context) -> {
             var delta = power * context.getRenderDelta();
-            var pitch = 0;
-            var yaw = 0;
-            var roll = 0;
+            var pitch = 0.0;
+            var yaw = 0.0;
+            var roll = 0.0;
 
             if (ModKeybindings.PITCH_UP.isPressed()) {
                 pitch -= delta;
@@ -92,35 +89,19 @@ public class RotationModifiers {
         return rotationInstant.add(0, 0, -rollDelta * strength * delta);
     }
 
-    public static RotationInstant manageThrottle(RotationInstant rotationInstant, RollContext context) {
-        var delta = context.getRenderDelta();
-
-        if (ModKeybindings.THRUST_FORWARD.isPressed()) {
-            DoABarrelRollClient.throttle += 0.1 * delta;
-        } else if (ModKeybindings.THRUST_BACKWARD.isPressed()) {
-            DoABarrelRollClient.throttle -= 0.1 * delta;
-        } else {
-            DoABarrelRollClient.throttle -= DoABarrelRollClient.throttle * 0.95 * delta;
-        }
-
-        DoABarrelRollClient.throttle = MathHelper.clamp(DoABarrelRollClient.throttle, 0, ModConfig.INSTANCE.getMaxThrust());
-
-        return rotationInstant;
-    }
-
     public static RollContext.ConfiguresRotation fixNaN(String name) {
         return (rotationInstant, context) -> {
             if (Double.isNaN(rotationInstant.pitch())) {
                 rotationInstant = RotationInstant.of(0, rotationInstant.yaw(), rotationInstant.roll());
-                DoABarrelRoll.LOGGER.warn("NaN found in pitch for " + name + ", setting to 0 as fallback");
+                DoABarrelRoll.LOGGER.warn("NaN found in pitch for {}, setting to 0 as fallback", name);
             }
             if (Double.isNaN(rotationInstant.yaw())) {
                 rotationInstant = RotationInstant.of(rotationInstant.pitch(), 0, rotationInstant.roll());
-                DoABarrelRoll.LOGGER.warn("NaN found in yaw for " + name + ", setting to 0 as fallback");
+                DoABarrelRoll.LOGGER.warn("NaN found in yaw for {}, setting to 0 as fallback", name);
             }
             if (Double.isNaN(rotationInstant.roll())) {
                 rotationInstant = RotationInstant.of(rotationInstant.pitch(), rotationInstant.yaw(), 0);
-                DoABarrelRoll.LOGGER.warn("NaN found in roll for " + name + ", setting to 0 as fallback");
+                DoABarrelRoll.LOGGER.warn("NaN found in roll for {}, setting to 0 as fallback", name);
             }
             return rotationInstant;
         };

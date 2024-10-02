@@ -8,7 +8,6 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import nl.enjarai.doabarrelroll.DoABarrelRollClient;
 import nl.enjarai.doabarrelroll.ModKeybindings;
 import nl.enjarai.doabarrelroll.api.event.ThrustEvents;
 import nl.enjarai.doabarrelroll.config.ModConfig;
@@ -35,14 +34,17 @@ public abstract class LivingEntityMixin extends Entity {
             )
     )
     private Vec3d doABarrelRoll$wrapElytraVelocity(Vec3d original) {
-        if (!(((LivingEntity) (Object) this) instanceof ClientPlayerEntity) || !ModConfig.INSTANCE.getEnableThrust()) return original;
+        if (!((Object) this instanceof ClientPlayerEntity) || !ModConfig.INSTANCE.getEnableThrust()) return original;
 
         Vec3d rotation = getRotationVector();
         Vec3d velocity = getVelocity();
 
+        double throttleSign = ModKeybindings.THRUST_FORWARD.isPressed() ? 1 : ModKeybindings.THRUST_BACKWARD.isPressed() ? -1 : 0;
+        throttleSign = ThrustEvents.modifyThrustInput(throttleSign);
+
         if (ModConfig.INSTANCE.getThrustParticles()) {
-            int particleDensity = (int) MathHelper.clamp(DoABarrelRollClient.throttle * 10, 0, 10);
-            if (DoABarrelRollClient.throttle > 0.1 && getWorld().getTime() % (11 - particleDensity) == 0) {
+            int particleDensity = (int) MathHelper.clamp(throttleSign * 10, 0, 10);
+            if (throttleSign > 0.1 && getWorld().getTime() % (11 - particleDensity) == 0) {
                 var pPos = getPos().add(velocity.multiply(0.5).negate());
                 getWorld().addParticle(
                         ParticleTypes.CAMPFIRE_SIGNAL_SMOKE,
@@ -52,8 +54,6 @@ public abstract class LivingEntityMixin extends Entity {
             }
         }
 
-        double throttleSign = ModKeybindings.THRUST_FORWARD.isPressed() ? 1 : ModKeybindings.THRUST_BACKWARD.isPressed() ? -1 : 0;
-        throttleSign = ThrustEvents.modifyThrustInput(throttleSign);
         double maxSpeed = ModConfig.INSTANCE.getMaxThrust();
         double speedIncrease = Math.max(maxSpeed - velocity.length(), 0) / maxSpeed * throttleSign;
         double acceleration = ModConfig.INSTANCE.getThrustAcceleration() * speedIncrease;
