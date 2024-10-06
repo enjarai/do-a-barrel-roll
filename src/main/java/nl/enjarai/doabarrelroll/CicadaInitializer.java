@@ -1,3 +1,4 @@
+//? if fabric {
 package nl.enjarai.doabarrelroll;
 
 import nl.enjarai.cicada.api.conversation.ConversationManager;
@@ -14,3 +15,4 @@ public class CicadaInitializer implements CicadaEntrypoint {
         );
     }
 }
+//?}
