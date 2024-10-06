@@ -1,0 +1,35 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "nl.enjarai.doabarrelroll.mixin",
+  "refmap": "${mod_id}.refmap.json",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "CommandManagerMixin",
+    "LivingEntityMixin",
+    "roll.EntityTrackerEntryMixin",
+    "roll.entity.EntityMixin",
+    "roll.entity.LivingEntityMixin",
+    "roll.entity.PlayerEntityMixin"
+  ],
+  "client": [
+    "client.ClientPlayerEntityMixin",
+    "client.InGameHudMixin",
+    "client.LivingEntityMixin",
+    "client.PlayerEntityMixin",
+    "client.key.KeyBindingAccessor",
+    "client.key.KeyBindingEntryMixin",
+    "client.key.KeyBindingMixin",
+    "client.roll.CameraMixin",
+    "client.roll.DebugHudMixin",
+    "client.roll.MouseMixin",
+    "client.roll.PlayerEntityRendererMixin",
+    "client.roll.entity.ClientPlayerEntityMixin"
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
+

@@ -1,0 +1,75 @@
+{
+    "schemaVersion": 1,
+    "id": "do_a_barrel_roll",
+    "version": "${version}",
+    "name": "Do a Barrel Roll",
+    "description": "Microsoft flight simulator for Minecraft elytras.",
+    "authors": [
+        "enjarai"
+    ],
+    "contributors": [
+        "Originally based on Cool Elytra Roll by Jorbon, mod icon by Mizeno"
+    ],
+    "contact": {
+        "homepage": "https://enjarai.dev/",
+        "sources": "https://github.com/enjarai/do-a-barrel-roll",
+        "issues": "https://github.com/enjarai/do-a-barrel-roll/issues"
+    },
+    "license": "GPL-3.0",
+    "icon": "assets/do_a_barrel_roll/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "client": [
+          "nl.enjarai.doabarrelroll.DoABarrelRollInitializer"
+        ],
+        "main": [
+          "nl.enjarai.doabarrelroll.DoABarrelRollInitializer"
+        ],
+        "modmenu": [
+            "nl.enjarai.doabarrelroll.compat.modmenu.ModMenuIntegration"
+        ],
+        "cicada": [
+            "nl.enjarai.doabarrelroll.CicadaInitializer"
+        ],
+        "controlify": [
+            "nl.enjarai.doabarrelroll.compat.controlify.ControlifyCompat"
+        ],
+        "mixinsquared": [
+            "nl.enjarai.doabarrelroll.DABRMixinCanceller"
+        ]
+    },
+    "mixins": [
+        "do_a_barrel_roll.mixins.json",
+        "do_a_barrel_roll.compat.cameraoverhaul.mixins.json",
+        "do_a_barrel_roll.compat.modmenu.mixins.json"
+    ],
+    "accessWidener": "do_a_barrel_roll.accesswidener",
+
+    "suggests": {
+        "yet_another_config_lib_v3": ">=3.1.0"
+    },
+    "depends": {
+        "fabricloader": ">=0.15",
+        "fabric": "*",
+        "minecraft": "${mc}",
+        "java": ">=17",
+        "cicada": ">=0.6.0 <1.0.0"
+    },
+    "breaks": {
+        "optifabric": "*",
+        "controlify": "<2.0.0-beta.9"
+    },
+
+    "custom": {
+        "modmenu": {
+            "links": {
+                "modmenu.discord": "https://discord.gg/WcYsDDQtyR"
+            }
+        },
+        "projects": {
+            "modrinth": "6FtRfnLg",
+            "curseforge": 663658
+        }
+    }
+}
+  
