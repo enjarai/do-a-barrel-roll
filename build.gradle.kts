@@ -185,7 +185,7 @@ stonecutter {
 publishMods {
     val modrinthToken = findProperty("enjaraiModrinthToken")
     val curseforgeToken = findProperty("enjaraiCurseforgeToken")
-    val githubToken = findProperty("enjaraiGithubToken tTEST")
+    val githubToken = findProperty("enjaraiGithubToken")
     dryRun = modrinthToken == null || curseforgeToken == null || githubToken == null
 
     file = tasks.remapJar.get().archiveFile
