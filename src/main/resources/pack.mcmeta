@@ -1,6 +1,6 @@
 {
     "pack": {
-        "description": "${mod_name}",
+        "description": "Do a Barrel Roll",
         "pack_format": 8
     }
 }

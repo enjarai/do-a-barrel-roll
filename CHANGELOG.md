@@ -1,2 +1,2 @@
-- Added support for NeoForge 1.21(.1).
-- Modified the way thrusting particles are displayed, solving some compatibility issues.
+- Fixed a critical crash at startup.
+- Fixed some other minor issues.

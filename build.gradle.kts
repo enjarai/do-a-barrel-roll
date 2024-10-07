@@ -102,9 +102,7 @@ loom {
     if (loader == "forge") forge {
         convertAccessWideners.set(true)
         mixinConfigs(
-            "${mod.id}-client.mixins.json",
-            "${mod.id}-common.mixins.json",
-            "${mod.id}-compat.mixins.json"
+            "${mod.id}.mixins.json"
         )
     } else if (loader == "neoforge") neoForge {
 
@@ -121,6 +119,12 @@ loom {
         get("vineflower").apply {
             options.put("mark-corresponding-synthetics", "1")
         }
+    }
+
+    @Suppress("UnstableApiUsage")
+    mixin {
+        useLegacyMixinAp = false
+//        defaultRefmapName = "do_a_barrel_roll.refmap.json"
     }
 }
 
