@@ -1,2 +1,1 @@
-- Fixed a critical crash at startup.
-- Fixed some other minor issues.
+- Removed broken compatibility with Camera Overhaul.

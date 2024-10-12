@@ -93,6 +93,12 @@ dependencies {
         val (modid, version) = it.split('=')
         modCompileOnly(modrinth(modid, version))
     }
+    for (it in property("deps.compat_runtime").toString().split(',')) {
+        @Suppress("UselessCallOnNotNull")
+        if (it.isNullOrBlank()) continue
+        val (modid, version) = it.split('=')
+        modLocalRuntime(modCompileOnly(modrinth(modid, version))!!)
+    }
 }
 
 // Loom config

@@ -40,7 +40,6 @@
     },
     "mixins": [
         "do_a_barrel_roll.mixins.json",
-        "do_a_barrel_roll.compat.cameraoverhaul.mixins.json",
         "do_a_barrel_roll.compat.modmenu.mixins.json"
     ],
     "accessWidener": "do_a_barrel_roll.accesswidener",
