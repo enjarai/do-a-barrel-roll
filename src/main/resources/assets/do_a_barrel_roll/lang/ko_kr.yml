@@ -1,0 +1,306 @@
+config.do_a_barrel_roll:
+  title: §lDo a Barrel Roll
+  general:
+    .: 일반
+    mod_enabled: 모드 활성화
+    mod_enabled.description: > 
+      모드를 전체적으로 활성화하거나 비활성화합니다.
+      게임 내에서 %1$s를 사용하여 토글할 수도 있습니다.
+  controls:
+    .: 컨트롤
+    switch_roll_and_yaw: 돌기 움직임과 좌우 움직임 바꾸기
+    switch_roll_and_yaw.description: >
+      마우스를 사용하는 동안 돌기 움직임과 좌우 움직임을 바꿔 바닐라 움직임과 비슷하게 만듭니다.
+      최상의 경험을 위해서는 권장되지 않지만, 어떤 사람들에게는 비행이 더 쉬워질 수 있습니다.
+    momentum_based_mouse: 모멘텀 기반 마우스 사용
+    momentum_based_mouse.description: > 
+      마우스로 연속적인 움직임을 더 쉽게 만들어 주지만,
+      익숙해지는 데는 시간이 걸릴 수 있습니다.
+    show_momentum_widget: 모멘텀 마우스 위젯 표시
+    show_momentum_widget.description: > 
+      모멘텀 기반 마우스를 사용할 때 십자선을 유용한 위젯으로 바꿉니다.
+      선의 길이와 방향은 주어진 방향으로 적용된 회전력의 양을 나타냅니다.
+    momentum_mouse_deadzone: 모멘텀 마우스 제한
+    momentum_mouse_deadzone.description: >
+      모멘텀 기반 마우스를 사용할 때 제한 구역을 지정합니다.
+      직선 비행이 더 쉬워지는 대신, 값이 높을수록 미묘한 조정이 더 어려워집니다.
+    activation_behaviour:
+      .: 활성화 동작 조건
+      vanilla: 바닐라
+      triple_jump: 삼단 점프
+      hybrid: 하이브리드
+      hybrid_toggle: 하이브리드 토글
+      description:
+        .: |+
+          겉날개 활성화 방법을 설정합니다.
+        
+
+        vanilla: >
+          §l바닐라§r: 바닐라와 동일합니다. (발이 떠있는 상태에서 한 번 점프)
+        triple_jump: >        
+          §l삼단 점프§r: 땅에서 떨어져 있는 동안 한 번이 아닌 두 번 점프해야 합니다.
+          달리면서 점프 중에 겉날개가 활성화되는 것을 방지하는 데 도움이 될 수 있습니다.
+        hybrid: >
+          §l하이브리드§r: 땅에서 떨어져 있을 때 한 번 점프하면 표준 바닐라 비행이 활성화되고,
+          그 후 다시 점프하면 모드가 활성화되고 돌기 움직임이 잠금 해제됩니다.
+          익숙해지는 데 시간이 걸리지만, 좁은 공간에서 이륙할 때 도움이 될 수 있습니다.
+        hybrid_toggle: >
+          §l하이브리드 토글§r: 하이브리드 모드와 동일하지만 점프하면 모드와 돌기 움직임이
+          한 번만 활성화되는 것이 아니고 토글되어, 기본적으로 비행 중에 모드를 끄고 켤 수 있습니다.
+    invert_pitch: 상하 움직임 반전
+    invert_pitch.description: >
+      마우스로 비행하는 동안 상하 움직임을 반전시킵니다.
+    disable_when_submerged: 잠수 시 비활성화
+    disable_when_submerged.description: >
+      물 안에 있는 동안 모드를 비활성화합니다. 
+      수영하는 동안 원활한 제어를 위해 이 기능을 활성화하는 것이 좋습니다.
+  hud:
+    .: HUD
+    show_horizon: 수평선 위젯 표시
+    show_horizon.description: 십자선 주위에 간단한 수평선 위젯을 표시합니다.
+  banking:
+    .: 비행 설정
+    enable_banking: 돌기 활성화
+    enable_banking.description: > 
+      현재 도는 정도에 따라 카메라에 약간의 지속적인 좌우 움직임과 상하 움직임을 추가합니다.
+      비행 중에 더 현실적이고 비행기 같은 느낌을 만들어 90도 돌기를 완전히 하지 않고도 회전할 수 있습니다.
+    banking_strength: 돌기 강도
+    simulate_control_surface_efficacy: 제어 표면 효율성 시뮬레이션
+    simulate_control_surface_efficacy.description: >
+      현재 공격 각도에... 따라 다양한 제어 표면의 가변 권한을 시뮬레이션하려는 시도입니다.
+      이는 실험적이며 향후 변경될 수 있지만, 비행 경험을 개선할 수 있습니다.
+    automatic_righting: 자동 교정
+    automatic_righting.description: >
+      카메라가 어느 방향으로든 90도 이하로 돌 때, 카메라 방향을 바로잡기 위해 돌기 움직임을 적용합니다.
+      돌기 움직임 및 좌우 움직임을 전환하는 기능과 함께 이 기능을 활성화하면, 비행이 바닐라처럼 되면서도 수동으로 돌기 및 공중제비가 가능하게 됩니다. 
+      이 옵션은 멀미를 줄이는 데에도 도움이 될 수 있습니다.
+    righting_strength: 교정 강도
+  thrust:
+    .: 추진 옵션
+    enable_thrust: 추진 활성화
+    enable_thrust.description: >
+      걷날개로 비행하는 동안 %1$s 키를 사용하여 무한 가속할 수 있습니다.
+      §4이 기능은 서버가 명시적으로 허용해주지 않는 한, 모든 서버에서 비활성화됩니다.
+    max_thrust: 최대 추진 속도
+    max_thrust.description: >
+      틱당 블록 단위로 추진하여 도달할 수 있는 최대 속도입니다.
+      이것을 2-3 이상으로 설정하면 청크가 충분히 빨리 로드되지 않는 문제가 발생할 수 있습니다.
+    thrust_acceleration: 추진 가속
+    thrust_acceleration.description: >
+      블록당 틱의 제곱에 의한 추진 가속도입니다.
+      값이 높을수록 최대 속도에 도달하기가 더 쉬워집니다.
+    thrust_particles: 추진 입자 표시
+  misc:
+    .: 기타
+    enable_easter_eggs: 이스터 에그 활성화
+  sensitivity: 감도
+  smoothing:
+    .: 보간
+    smoothing_enabled: 보간 활성화
+    smoothing_pitch: 상하 움직임
+    smoothing_yaw: 좌우 움직임
+    smoothing_roll: 돌기 움직임
+  desktop:
+    .: 마우스 및 키보드 감도
+    pitch: 상하 움직임
+    yaw: 좌우 움직임
+    roll: 돌기 움직임
+  controller:
+    .: 컨트롤러 감도
+    description: Controlify 모드가 설치된 경우에만 적용됩니다.
+    pitch: 상하 움직임
+    yaw: 좌우 움직임
+    roll: 돌기 움직임
+  server:
+    .: 서버
+    description: §l이 설정은 서버 전체에 적용되며 운영자만 변경할 수 있습니다.
+    force_enabled: 모드 활성화 강제
+    force_enabled.description: >
+      서버의 모든 플레이어에 대해 모드를 강제로 활성화합니다.
+      이렇게 하면 클라이언트 측 토글링과 일부 활성화 동작이 비활성화됩니다.
+    force_installed: 모드 강제 설치
+    force_installed.description: >
+      서버의 모든 플레이어에게 모드를 강제로 설치합니다.
+      이렇게 하면 모드가 로드되지 않은 플레이어는 추방됩니다.
+    installed_timeout: 설치 확인 타임아웃
+    installed_timeout.description: >
+      서버가 클라이언트의 응답을 수신할 때까지 기다리는 시간(초)입니다.
+      §l모드를 설치했는데도 연결 상태가 나쁜 플레이어가 추방당하는 경우 이 값을 늘려 주세요.
+  gameplay:
+    .: 게임플레이
+    allow_thrusting: 추진 허용
+    allow_thrusting.description: >
+      플레이어가 앞으로 및 뒤로 키(기본적으로 W 및 S)를 사용해 각각 무한 가속 및 감속할 수 있게 해줍니다.
+    kinetic_damage:
+      .: 운동 에너지에 의한 데미지 종류
+      vanilla: 바닐라
+      high_speed: 고속
+      none: 없음
+      instant_kill: 즉사
+      description:
+        .: |+
+          겉날개 활성화 방법을 설정합니다.
+
+
+        vanilla: >
+          §l바닐라§r: 바닐라와 동일합니다.
+        high_speed: >
+          §l고속§r: 속도가 상당히 증가했을 때만 운동 에너지 피해를 입힙니다.
+        none: >
+          §l없음§r: 운동 에너지 피해를 완전히 비활성화합니다.
+        instant_kill: >
+          §l즉사§r: 플레이어가 벽에 부딪히는 순간 즉시 사망합니다.
+  advanced:
+    .: 고급
+    description: §l이 설정을 사용하면 비행에 사용되는 특정 계산을 수정할 수 있으며, 값을 수정하는 것은 전문가에게만 권장됩니다.
+  banking_math:
+    .: 돌기 계산
+    banking_x_formula: 돌기 X값 함수
+    banking_x_formula.description: |
+      §7이 표현식은 돌기가 활성화되었을 때 적용할 절대 좌우 움직임의 양을 계산하는 데 사용됩니다.
+      기본적으로 이는 플레이어의 현재 상하 움직임과 돌기 움직임, 그리고 설정된 돌기 강도를 기반으로 합니다.
+      
+      참고: 이 경우 절대 좌우 움직임은 플레이어의 돌기 움직임이 0이라고 가정했을 때의 좌우 움직임을 의미합니다.
+      
+      추가 변수:
+        - §f$§abanking_strength§7: 설정된 돌기 강도.
+    banking_y_formula: 돌기 Y값 함수
+    banking_y_formula.description: |
+      §7이 표현식은 돌기가 활성화되었을 때 적용할 절대 상하 움직임의 양을 계산하는 데 사용됩니다.
+      기본적으로 이는 플레이어의 현재 상하 움직임과 돌기 움직임, 그리고 설정된 돌기 강도를 기반으로 합니다.
+      
+      참고: 이 경우 절대 상하 움직임은 플레이어의 돌기 움직임이 0이라고 가정했을 때의 상하 움직임을 의미합니다.
+      
+      추가 변수:
+        - §f$§abanking_strength§7: 설정된 돌기 강도.
+  control_surface_efficacy:
+    .: 제어 표면 효율성 계산
+    elevator: 수평 꼬리날개 (상하 움직임)
+    elevator.description: >
+      §7이 표현식은 수평 꼬리날개 제어 표면의 효율성을 계산하는 데 사용됩니다.
+      이는 기본적으로 제어 표면의 추정된 공격 각도를 기반으로 합니다.
+    aileron: 수평 보조날개 (돌기 움직임)
+    aileron.description: >
+      §7이 표현식은 수평 보조날개 제어 표면의 효율성을 계산하는 데 사용됩니다.
+      이는 기본적으로 제어 표면의 추정된 공격 각도를 기반으로 합니다.
+    rudder: 수직 꼬리날개 (좌우 움직임)
+    rudder.description: >
+      §7이 표현식은 수직 꼬리날개 제어 표면의 효율성을 계산하는 데 사용됩니다.
+      이는 기본적으로 제어 표면의 추정된 공격 각도를 기반으로 합니다.
+  documentation:
+    .: 참고 문서
+    description: |-
+      §7위의 표현식은 계산에 변수와 함수를 사용할 수 있는 사용자 지정 표현식 언어를 사용합니다.
+      
+      기본적인 수학 연산의 경우 표준 연산자인 §d+§7, §d-§7, §d*§7, §d/§7, 지수 연산의 경우 §d^§7을 사용할 수 있습니다.
+      계산 순서는 사칙연산을 따르므로 괄호를 사용하여 연산을 그룹화할 수 있습니다.
+      
+      그 외에도 사용할 수 있는 세 가지 유형의 명명된 표현식이 있습니다.
+        - §f$§avariables§7: §f$§7로 시작하고 동적 값을 보유합니다.
+        - §efunctions§f()§7: 괄호 뒤에 이름이 붙고 괄호 안에 인수를 받습니다.
+        - §6CONSTANTS§7: 변수나 함수가 아닌 이름으로 상수 값으로 대체됩니다.
+        
+      아래를 확장하여 사용 가능한 변수, 함수 및 상수를 확인하세요.
+    get_help:
+      .: 디스코드에서 도움 받기
+      text: 열기
+      confirm: 이 디스코드 초대 링크를 브라우저에서 여시겠습니까?
+  variables_documentation:
+    .: 변수
+    description: |-
+      §7다음 변수를 사용할 수 있습니다.
+        - §f$§apitch§7: 플레이어의 현재 상하 움직임값(도)
+        - §f$§ayaw§7: 플레이어의 현재 좌우 움직임값(도)
+        - §f$§aroll§7: 플레이어의 현재 돌기 움직임값(도)
+        - §f$§avelocity_length§7: 플레이어의 현재 속도(틱당 블록)
+        - §f$§avelocity_x§7: 플레이어의 X축을 따라 현재 속도(틱당 블록)
+        - §f$§avelocity_y§7: 플레이어의 Y축을 따라 현재 속도(틱당 블록)
+        - §f$§avelocity_z§7: 플레이어의 Z축을 따라 현재 속도(틱당 블록)
+        - §f$§alook_x§7: 플레이어의 X축을 따라 현재 시선 벡터.
+        - §f$§alook_y§7: 플레이어의 Y축을 따라 현재 시선 벡터.
+        - §f$§alook_z§7: 플레이어의 Z축을 따라 현재 시선 벡터.
+  functions_documentation:
+    .: 함수
+    description: |-
+      §7다음 함수를 사용할 수 있습니다.
+        - §esqrt§f(x)§7: x의 제곱근을 반환합니다.
+        - §esin§f(x)§7: x의 사인을 반환합니다.
+        - §ecos§f(x)§7: x의 코사인을 반환합니다.
+        - §etan§f(x)§7: x의 탄젠트를 반환합니다.
+        - §easin§f(x)§7: x의 아크사인을 반환합니다.
+        - §eacos§f(x)§7: x의 아크코사인을 반환합니다.
+        - §eatan§f(x)§7: x의 아크탄젠트를 반환합니다.
+        - §eabs§f(x)§7: x의 절대값을 반환합니다.
+        - §eciel§f(x)§7: x의 올림값을 반환합니다.
+        - §efloor§f(x)§7: x의 버림값을 반환합니다.
+        - §eround§f(x)§7: x의 반올림값을 반환합니다.
+        - §elog§f(x)§7: x의 자연 로그를 반환합니다.
+        - §erandint§f(max)§7: 0과 max 사이의 임의의 정수를 반환합니다.
+        - §erandint§f(min, max)§7: min과 max 사이의 임의의 정수를 반환합니다.
+        - §emin§f(x, y)§7: x와 y 중 작은 값을 반환합니다.
+        - §emax§f(x, y)§7: x와 y 중 큰 값을 반환합니다.
+  constants_documentation:
+    .: 상수
+    description: |-
+      §7다음 상수를 사용할 수 있습니다.
+        - §6PI§7: 원주율(3.14159)
+        - §6E§7: 자연로그의 밑(2.71828)
+        - §6TO_RAD§7: 도에서 라디안으로 변환 계수(0.01745)
+        - §6TO_DEG§7: 라디안에서 도로 변환 계수(57.29578)
+  yacl:
+    missing:
+      .: Yet Another Config Lib가 설치되지 않았습니다.
+      message: 게임 내 구성을 편집하려면 YACL 3이 필요합니다. YACL 3을 설치하시겠습니까?
+    outdated:
+      .: Yet Another Config Lib가 오래되었습니다.
+      message: 게임 내 구성을 편집하려면 최신 버전의 YACL 3이 필요합니다. YACL 3을 업데이트하시겠습니까?
+category.do_a_barrel_roll.do_a_barrel_roll:
+  .: Do a Barrel Roll
+  movement: Do a Barrel Roll 움직임
+key.do_a_barrel_roll:
+  toggle_enabled:
+    .: 활성화 토글
+    enable: Do a Barrel Roll §a활성화됨§r
+    disable: Do a Barrel Roll §a비활성화됨§r
+    disallowed: §c이 서버에서는 Do a Barrel Roll을 비활성화할 수 없습니다.
+  toggle_thrust:
+    .: 추진 토글
+    enable: 추진 §a활성화됨§r
+    disable: 추진 §a비활성화됨§r
+    disallowed: §c이 서버에서는 추진을 사용할 수 없습니다.
+  open_config: 설정 열기
+
+  pitch_up: 시야 위로 올리기
+  pitch_down: 시야 아래로 내리기
+  yaw_left: 시야 왼쪽으로 돌리기
+  yaw_right: 시야 오른쪽으로 돌리기
+  roll_left: 시야 왼쪽으로 회전하기
+  roll_right: 시야 오른쪽으로 회전하기
+  thrust_forward: 앞으로 추진
+  thrust_backward: 뒤로 추진
+
+
+toast.do_a_barrel_roll:
+  .: Do a Barrel Roll
+  thrusting_disabled_by_server: >-
+    §c겉날개 추진은 이 서버에서 허용되지 않기 떄문에 이 기능은 강제로 비활성화되었습니다.
+    이 메시지를 숨기려면 클라이언트 설정에서 이를 비활성화하세요.
+  mod_forced_enabled_by_server: >-
+    이 모드는 이 서버에 의해 강제로 활성화되어 클라이언트 측 토글링과 일부 활성화 동작이 비활성화됩니다.
+  server_config_updated: >-
+    서버 설정이 성공적으로 업데이트되어 모든 플레이어에게 새로운 설정을 전송했습니다.
+  server_config_update_failed: >-
+    서버 설정을 업데이트하지 못했습니다. ㅠ~ㅠ 자세한 내용은 서버 로그를 참조하세요.
+
+
+controlify:
+  category.do_a_barrel_roll.do_a_barrel_roll: Do a Barrel Roll 움직임
+  bind.do_a_barrel_roll:
+    pitch_up: 시야 위로 올리기
+    pitch_down: 시야 아래로 내리기
+    yaw_left: 시야 왼쪽으로 돌리기
+    yaw_right: 시야 오른쪽으로 돌리기
+    roll_left: 시야 왼쪽으로 회전하기
+    roll_right: 시야 오른쪽으로 회전하기
+    thrust_forward: 앞으로 추진
+    thrust_backward: 뒤로 추진
