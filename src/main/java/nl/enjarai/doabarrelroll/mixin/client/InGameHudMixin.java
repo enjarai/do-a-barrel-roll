@@ -45,6 +45,6 @@ public abstract class InGameHudMixin {
             )
     )
     private void doABarrelRoll$renderPeppy(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
-        StarFoxUtil.renderPeppy(context, tickCounter.getTickDelta(false), context.getScaledWindowWidth(), context.getScaledWindowHeight());
+        StarFoxUtil.renderPeppy(context, tickCounter.getFixedDeltaTicks(), context.getScaledWindowWidth(), context.getScaledWindowHeight());
     }
 }

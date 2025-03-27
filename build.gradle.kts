@@ -34,7 +34,7 @@ repositories {
     strictMaven("https://api.modrinth.com/maven", "maven.modrinth")
     maven("https://maven.enjarai.dev/releases")
     maven("https://maven.enjarai.dev/mirrors")
-    maven("https://jitpack.io")
+//    maven("https://jitpack.io")
     maven("https://maven.neoforged.net/releases/")
     maven("https://maven.terraformersmc.com/releases/")
     maven("https://maven.bawnorton.com/releases/")

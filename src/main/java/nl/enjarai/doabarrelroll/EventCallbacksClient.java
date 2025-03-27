@@ -27,22 +27,24 @@ public class EventCallbacksClient {
 
     public static void onRenderCrosshair(DrawContext context, RenderTickCounter tickCounter, int scaledWidth, int scaledHeight) {
         if (!DoABarrelRollClient.isFallFlying()) return;
-        var tickDelta = tickCounter.getTickDelta(true);
+        var tickDelta = tickCounter.getFixedDeltaTicks();
 
         var matrices = context.getMatrices();
         var entity = MinecraftClient.getInstance().getCameraEntity();
         var rollEntity = ((RollEntity) entity);
         if (entity != null) {
-            if (ModConfig.INSTANCE.getShowHorizon()) {
-                HorizonLineWidget.render(matrices, scaledWidth, scaledHeight,
-                        rollEntity.doABarrelRoll$getRoll(tickDelta), entity.getPitch(tickDelta));
-            }
+            context.draw(consumers -> {
+                if (ModConfig.INSTANCE.getShowHorizon()) {
+                    HorizonLineWidget.render(matrices, consumers, scaledWidth, scaledHeight,
+                            rollEntity.doABarrelRoll$getRoll(tickDelta), entity.getPitch(tickDelta));
+                }
 
-            if (ModConfig.INSTANCE.getMomentumBasedMouse() && ModConfig.INSTANCE.getShowMomentumWidget()) {
-                var rollMouse = (RollMouse) MinecraftClient.getInstance().mouse;
+                if (ModConfig.INSTANCE.getMomentumBasedMouse() && ModConfig.INSTANCE.getShowMomentumWidget()) {
+                    var rollMouse = (RollMouse) MinecraftClient.getInstance().mouse;
 
-                MomentumCrosshairWidget.render(matrices, scaledWidth, scaledHeight, new Vector2d(rollMouse.doABarrelRoll$getMouseTurnVec()));
-            }
+                    MomentumCrosshairWidget.render(matrices, consumers, scaledWidth, scaledHeight, new Vector2d(rollMouse.doABarrelRoll$getMouseTurnVec()));
+                }
+            });
         }
     }
 }

@@ -46,7 +46,7 @@ public abstract class LivingEntityMixin extends Entity {
             int particleDensity = (int) MathHelper.clamp(throttleSign * 10, 0, 10);
             if (throttleSign > 0.1 && getWorld().getTime() % (11 - particleDensity) == 0) {
                 var pPos = getPos().add(velocity.multiply(0.5).negate());
-                getWorld().addParticle(
+                getWorld().addParticleClient(
                         ParticleTypes.CAMPFIRE_SIGNAL_SMOKE,
                         pPos.getX(), pPos.getY(), pPos.getZ(),
                         0, 0, 0
