@@ -168,6 +168,18 @@ public abstract class CameraMixin implements RollCamera {
             return original - MathHelper.lerp(tickDelta.get(), lastRollBack, rollBack);
         }
     }
+
+    @ModifyArg(
+            method = "setRotation(FF)V",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/render/Camera;setRotation(FFF)V"
+            ),
+            index = 2
+    )
+    private float doABarrelRoll$retainRoll(float original) {
+        return this.roll;
+    }
     *///?}
 
 
