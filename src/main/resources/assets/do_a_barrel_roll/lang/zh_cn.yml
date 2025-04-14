@@ -1,0 +1,316 @@
+config.do_a_barrel_roll:
+  title: §l滚筒飞行
+  general:
+    .: 通用
+    mod_enabled: 启用模组
+    mod_enabled.description: > 
+      完全启用或禁用该模组。也可以在游戏内通过 %1$s 切换。
+  controls:
+    .: 控制
+    switch_roll_and_yaw: 交换滚转与偏航轴
+    switch_roll_and_yaw.description: >
+      在使用鼠标时交换滚转（Roll）和偏航（Yaw）轴，以更贴近原版的操控方式。
+      为了最佳体验，并不推荐。但这可能会让某些玩家的飞行操作更加顺手。
+      译注：
+      滚转（Roll）：绕飞机纵轴的旋转，控制左右倾斜；
+      偏航（Yaw）：绕飞机垂直轴的旋转，控制机头左右转向。
+    momentum_based_mouse: 启用基于动量的鼠标控制
+    momentum_based_mouse.description: > 
+      让使用鼠标进行连续移动更加轻松，不过可能需要一些时间来适应。
+    show_momentum_widget: 显示动量鼠标小部件
+    show_momentum_widget.description: > 
+      在使用基于动量的鼠标时，将准星变成一个辅助小部件。
+      线条的长度表示在某一方向上施加的转向力度大小。
+    momentum_mouse_deadzone: 动量鼠标死区
+    momentum_mouse_deadzone.description: >
+      在使用基于动量的鼠标时，设置一个死区。
+      这可以让直线飞行更加容易，但较高的值会使细微调整变得更困难。
+      译注：
+      死区（Deadzone）：输入设备中不会产生任何输出或响应的区域。只有当鼠标移动超出设定的阈值（即离开死区）时，系统才会开始响应并执行相应的动作。
+    activation_behaviour:
+      .:  激活行为
+      vanilla: 原版
+      triple_jump: 三段跳
+      hybrid: 混合模式
+      hybrid_toggle: 混合切换模式
+      description:
+        .: |+
+          配置鞘翅的激活方式。
+        
+
+        vanilla: >
+          §l原版§r：与原版行为一致，在空中跳跃一次即可激活鞘翅。
+        triple_jump: >
+          §l三段跳§r：需要在空中连续跳跃两次（而非一次）才能激活鞘翅。
+          这有助于防止在冲刺跳跃时意外激活鞘翅。
+        hybrid: >
+          §l混合模式§r：在空中跳跃一次激活标准的原版飞行，再次跳跃后启用模组并解锁滚转轴。
+          需要一些时间适应，但在狭窄空间起飞时非常有用。
+        hybrid_toggle: >
+          §l混合切换模式§r：与混合模式类似，但跳跃会切换模组和滚转轴的开关状态，而不仅仅是单次启用。
+          让你飞行时可以即时地开关模组。
+    invert_pitch: 反转俯仰
+    invert_pitch.description: >
+      在使用鼠标飞行时反转俯仰轴。（反转y轴）
+    disable_when_submerged: 潜水时禁用
+    disable_when_submerged.description: >
+      当你处于水下时禁用此模组。
+      建议保持此选项启用，以防止游泳时失去控制。
+  hud:
+    .: HUD
+    show_horizon: 显示地平线小部件
+    show_horizon.description: 在准星周围显示一个简单的人工地平线小部件。
+  banking:
+    .: 飞行选项
+    enable_banking: 启用倾斜飞行
+    enable_banking.description: > 
+      根据当前滚转角度，为摄像机添加轻微的连续偏航和俯仰效果。
+      这会让飞行更具有真实感，像驾驶飞机一样，让你无需进行完整的90度滚转即可完成转弯。
+    banking_strength: 倾斜强度
+    simulate_control_surface_efficacy: 模拟控制面效能
+    simulate_control_surface_efficacy.description: >
+      尝试根据当前攻角模拟不同控制面的可变效能。
+      此功能为实验性功能，未来可能会调整，但可能改善你的飞行体验。
+    automatic_righting: 自动校正
+    automatic_righting.description: >
+      当摄像机在任一方向滚转不超过90度时，施加一个人工的滚转输入以重新校正视角为正向。
+      同时启用此选项与“交换滚转和偏航轴”会让飞行更接近原版风格，但仍允许手动滚转和翻筋斗。
+      你可能还会发现此选项有助于减少晕动症。
+    righting_strength: 校正强度
+  thrust:
+    .: 推进选项
+    enable_thrust: 启用推进
+    enable_thrust.description: >
+      允许你使用 %1$s 键，在使用鞘翅飞行时无限加速。
+      
+      §4此功能在未明确允许的服务器上将被禁用。
+    max_thrust: 最大推进速度
+    max_thrust.description: >
+      推进时可达到的最大速度（块 / 游戏刻）。
+      将其设置为高于 2-3 的值可能会导致区块加载速度不够快的问题。
+    thrust_acceleration: 推进加速度
+    thrust_acceleration.description: >
+      推进的加速度（块 / 游戏刻²）。
+      较高的值会让加速到最大速度变得更加容易。
+    thrust_particles: 显示推进粒子效果
+  misc:
+    .: 杂项
+    enable_easter_eggs: 启用彩蛋
+  sensitivity: 灵敏度
+  smoothing:
+    .: 平滑处理
+    smoothing_enabled: 启用平滑处理
+    smoothing_pitch: 俯仰平滑（Pitch）
+    smoothing_yaw: 偏航平滑（Yaw）
+    smoothing_roll: 滚转平滑（Roll）
+  desktop:
+    .: 鼠标和键盘灵敏度
+    pitch: 俯仰（Pitch）
+    yaw: 偏航（Yaw）
+    roll: 滚转（Roll）
+  controller:
+    .: 控制器灵敏度
+    description: 仅在安装了 Controlify 时适用。
+    pitch: 俯仰（Pitch）
+    yaw: 偏航（Yaw）
+    roll: 滚转（Roll）
+  server:
+    .: 服务器
+    description: §l这些设置适用于整个服务器，且只能由管理员更改。
+    force_enabled: 强制启用模组
+    force_enabled.description: >
+      强制服务器上的所有玩家启用此模组。
+      这将禁用客户端的切换功能以及部分激活行为。
+    force_installed: 强制安装模组
+    force_installed.description: >
+      强制服务器上的所有玩家安装此模组。
+      这将踢出未加载该模组的玩家。
+    installed_timeout: 安装检查超时
+    installed_timeout.description: >
+      服务器在踢出玩家之前，等待客户端完成握手响应的时间（秒）。
+      §l如果连接不佳的玩家即使安装了模组仍被踢出，请增加此值。
+  gameplay:
+    .: 游戏玩法
+    allow_thrusting: 允许推进
+    allow_thrusting.description: >
+      允许玩家使用前进和后退键（默认为 W 和 S 键）分别进行无限加速和减速。
+    kinetic_damage:
+      .: 动能伤害类型
+      vanilla: 原版
+      high_speed: 高速
+      none: 无
+      instant_kill: 瞬杀
+      description:
+        .: |+
+          配置鞘翅激活时的动能伤害类型。
+
+
+        vanilla: >
+          §l原版§r：与原版行为一致。
+        high_speed: >
+          §l高速§r：仅在速度显著增加时应用动能伤害。
+        none: >
+          §l无§r：完全禁用动能伤害。
+        instant_kill: >
+          §l瞬杀§r：当玩家撞墙时立即死亡。
+  advanced:
+    .: 高级
+    description: §l这些设置允许你修改用于飞行的某些计算，建议仅高级用户使用。
+  banking_math:
+    .: 倾斜计算
+    banking_x_formula: X轴倾斜函数
+    banking_x_formula.description: |
+      §7此表达式用于在启用倾斜时计算应用的绝对偏航量。
+      默认情况下，该值基于玩家当前的俯仰角、滚转角以及配置的倾斜强度。
+      
+      注意：此处的“绝对偏航”是指假设玩家的滚转角为零时所应用的偏航。
+      
+      额外变量：
+        - §f$§abanking_strength§7: 配置的倾斜强度。
+    banking_y_formula: Y轴倾斜函数
+    banking_y_formula.description: |
+      §7此表达式用于在启用倾斜时计算应用的绝对俯仰量。
+      默认情况下，该值基于玩家当前的俯仰角、滚转角以及配置的倾斜强度。
+      
+      注意：此处的“绝对俯仰”是指假设玩家的滚转角为零时所应用的俯仰。
+      
+      额外变量：
+        - §f$§abanking_strength§7: 配置的倾斜强度。
+  control_surface_efficacy:
+    .: 控制面效能计算
+    elevator: 升降舵（俯仰）
+    elevator.description: >
+      §7此表达式用于计算升降舵控制面的效能。
+      默认情况下，该值基于控制面的预估攻角。
+    aileron: 副翼（滚转）
+    aileron.description: >
+      §7此表达式用于计算副翼控制面的效能。
+      默认情况下，该值基于控制面的预估攻角。
+    rudder: 方向舵（偏航）
+    rudder.description: >
+      §7此表达式用于计算方向舵控制面的效能。
+      默认情况下，该值基于控制面的预估攻角。
+  documentation:
+    .: 文档
+    description: |-
+      §7上述表达式使用了一种自定义的表达式语言，允许你在计算中使用变量和函数。
+      
+      
+      对于基本的数学运算，你可以使用标准运算符：§d+§7, §d-§7, §d*§7, §d/§7, 和 §d^§7。
+      计算顺序遵循 PEMDAS 规则，因此你可以使用括号来分组操作。
+      
+      
+      除此之外，还有三种类型的命名表达式可供使用：
+        - §f$§a变量§7：以§f$§7开头，存储动态值。
+        - §e函数§f()§7：名称后跟括号，并在括号中接收参数。
+        - §6常量§7：这些名称既不是变量也不是函数，会被替换为固定值。
+      
+      
+      展开以下分类以查看可用的变量、函数和常量。
+    get_help:
+      .: 在 Discord 中获取帮助
+      text: 打开
+      confirm: 你是否希望在浏览器中打开此 Discord 邀请链接？
+  variables_documentation:
+    .: 变量
+    description: |-
+      §7以下变量可用：
+        - §f$§apitch§7：玩家当前的俯仰角，单位为度。
+        - §f$§ayaw§7：玩家当前的偏航角，单位为度。
+        - §f$§aroll§7：玩家当前的滚转角，单位为度。
+        - §f$§avelocity_length§7：玩家当前的速度，单位为每刻方块数。
+        - §f$§avelocity_x§7：玩家当前沿 X 轴的速度，单位为每刻方块数。
+        - §f$§avelocity_y§7：玩家当前沿 Y 轴的速度，单位为每刻方块数。
+        - §f$§avelocity_z§7：玩家当前沿 Z 轴的速度，单位为每刻方块数。
+        - §f$§alook_x§7：玩家当前的观察向量沿 X 轴的分量。
+        - §f$§alook_y§7：玩家当前的观察向量沿 Y 轴的分量。
+        - §f$§alook_z§7：玩家当前的观察向量沿 Z 轴的分量。
+  functions_documentation:
+    .: 函数
+    description: |-
+      §7以下函数可用：
+        - §esqrt§f(x)§7：返回 x 的算术平方根。
+        - §esin§f(x)§7：返回 x 的正弦值。
+        - §ecos§f(x)§7：返回 x 的余弦值。
+        - §etan§f(x)§7：返回 x 的正切值。
+        - §easin§f(x)§7：返回 x 的反正弦值。
+        - §eacos§f(x)§7：返回 x 的反余弦值。
+        - §eatan§f(x)§7：返回 x 的反正切值。
+        - §eabs§f(x)§7：返回 x 的绝对值。
+        - §eciel§f(x)§7：返回大于或等于 x 的最小整数。
+        - §efloor§f(x)§7：返回小于或等于 x 的最大整数。
+        - §eround§f(x)§7：返回最接近 x 的整数。
+        - §elog§f(x)§7：返回 x 的自然对数。
+        - §erandint§f(max)§7：返回一个介于 0 和 max 之间的随机整数。
+        - §erandint§f(min, max)§7：返回一个介于 min 和 max 之间的随机整数。
+        - §emin§f(x, y)§7：返回 x 和 y 中较小的值。
+        - §emax§f(x, y)§7：返回 x 和 y 中较大的值。
+  constants_documentation:
+    .: 常量
+    description: |-
+      §7以下常量可用：
+        - §6PI§7：π 的值。
+        - §6E§7：e 的值。
+        - §6TO_RAD§7：从角度转换为弧度的转换因子。
+        - §6TO_DEG§7：从弧度转换为角度的转换因子。
+      
+
+  yacl:
+    missing:
+      .: 未安装 Yet Another Config Lib
+      message: 需要 YACL3 才能在游戏中编辑配置，您是否想安装 YACL3？
+    outdated:
+      .: Yet Another Config Lib 已过时
+      message: 需要最新版本的 YACL3 才能在游戏中编辑配置，您是否想更新 YACL3？
+
+
+category.do_a_barrel_roll.do_a_barrel_roll:
+  .: 桶滚飞行
+  movement: 完成一个桶滚动作
+key.do_a_barrel_roll:
+  toggle_enabled:
+    .: 切换启用状态
+    enable: §a已启用 §r桶滚飞行
+    disable: §c已禁用 §r桶滚飞行
+    disallowed: §c您无法在此服务器上禁用桶滚飞行
+  toggle_thrust:
+    .: 切换推进状态
+    enable: §a已启用 §r推进
+    disable: §c已禁用 §r推进
+    disallowed: §c您无法在此服务器上使用推进
+  open_config: 打开配置
+
+  pitch_up: 抬高俯仰
+  pitch_down: 降低俯仰
+  yaw_left: 左偏航
+  yaw_right: 右偏航
+  roll_left: 左滚转
+  roll_right: 右滚转
+  thrust_forward: 向前推进
+  thrust_backward: 向后推进
+
+
+toast.do_a_barrel_roll:
+  .: 桶滚飞行
+  thrusting_disabled_by_server: >-
+    §c此服务器不允许使用鞘翅推进功能，该功能将被强制禁用。
+    请在客户端配置中禁用此功能以移除此提示。
+  mod_forced_enabled_by_server: >-
+    此模组已被服务器强制启用，客户端切换功能和部分激活行为将被禁用。
+  server_config_updated: >-
+    服务器配置已成功更新，正在向所有玩家发送新配置。
+  server_config_update_failed: >-
+    更新服务器配置失败，请检查服务器日志以获取更多信息。
+
+
+controlify:
+  category.do_a_barrel_roll.do_a_barrel_roll: 完成一个桶滚动作
+  bind.do_a_barrel_roll:
+    pitch_up: 抬高俯仰
+    pitch_down: 降低俯仰
+    yaw_left: 左偏航
+    yaw_right: 右偏航
+    roll_left: 左滚转
+    roll_right: 右滚转
+    thrust_forward: 向前推进
+    thrust_backward: 向后推进
