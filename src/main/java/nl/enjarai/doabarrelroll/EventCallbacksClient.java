@@ -11,6 +11,7 @@ import nl.enjarai.doabarrelroll.render.HorizonLineWidget;
 import nl.enjarai.doabarrelroll.render.MomentumCrosshairWidget;
 import nl.enjarai.doabarrelroll.util.StarFoxUtil;
 import org.joml.Vector2d;
+import org.joml.Vector2i;
 
 public class EventCallbacksClient {
     public static void clientTick(MinecraftClient client) {
@@ -25,26 +26,25 @@ public class EventCallbacksClient {
         StarFoxUtil.clientTick(client);
     }
 
-    public static void onRenderCrosshair(DrawContext context, RenderTickCounter tickCounter, int scaledWidth, int scaledHeight) {
-        if (!DoABarrelRollClient.isFallFlying()) return;
+    public static Vector2i onRenderCrosshair(DrawContext context, RenderTickCounter tickCounter, int scaledWidth, int scaledHeight) {
+        if (!DoABarrelRollClient.isFallFlying()) return new Vector2i(0, 0);
         var tickDelta = tickCounter.getFixedDeltaTicks();
 
-        var matrices = context.getMatrices();
         var entity = MinecraftClient.getInstance().getCameraEntity();
         var rollEntity = ((RollEntity) entity);
         if (entity != null) {
-            context.draw(consumers -> {
-                if (ModConfig.INSTANCE.getShowHorizon()) {
-                    HorizonLineWidget.render(matrices, consumers, scaledWidth, scaledHeight,
-                            rollEntity.doABarrelRoll$getRoll(tickDelta), entity.getPitch(tickDelta));
-                }
+            if (ModConfig.INSTANCE.getShowHorizon()) {
+                HorizonLineWidget.render(context, scaledWidth, scaledHeight,
+                        rollEntity.doABarrelRoll$getRoll(tickDelta), entity.getPitch(tickDelta));
+            }
 
-                if (ModConfig.INSTANCE.getMomentumBasedMouse() && ModConfig.INSTANCE.getShowMomentumWidget()) {
-                    var rollMouse = (RollMouse) MinecraftClient.getInstance().mouse;
+            if (ModConfig.INSTANCE.getMomentumBasedMouse() && ModConfig.INSTANCE.getShowMomentumWidget()) {
+                var rollMouse = (RollMouse) MinecraftClient.getInstance().mouse;
 
-                    MomentumCrosshairWidget.render(matrices, consumers, scaledWidth, scaledHeight, new Vector2d(rollMouse.doABarrelRoll$getMouseTurnVec()));
-                }
-            });
+                return MomentumCrosshairWidget.render(context, scaledWidth, scaledHeight, new Vector2d(rollMouse.doABarrelRoll$getMouseTurnVec()));
+            }
         }
+
+        return new Vector2i(0, 0);
     }
 }

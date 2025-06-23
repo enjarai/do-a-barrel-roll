@@ -6,7 +6,6 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.GlfwUtil;
 import net.minecraft.text.Text;
-import net.minecraft.util.math.RotationAxis;
 import nl.enjarai.doabarrelroll.config.ModConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -56,9 +55,9 @@ public abstract class ModsScreenMixin extends Screen {
             float roll = (float) (rollSecs * Math.PI * 2);
 
             // Rotate around center ofc
-            matrices.translate(width / 2f, height / 2f, 0);
-            matrices.multiply(RotationAxis.POSITIVE_Z.rotation(roll));
-            matrices.translate(-width / 2f, -height / 2f, 0);
+            matrices.translate(width / 2f, height / 2f);
+            matrices.rotate(roll);
+            matrices.translate(-width / 2f, -height / 2f);
         }
     }
 }

@@ -1,13 +1,12 @@
 package nl.enjarai.doabarrelroll.render;
 
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 import nl.enjarai.doabarrelroll.ModMath;
 import org.joml.Vector2d;
+import org.joml.Vector2i;
 
 public class MomentumCrosshairWidget extends RenderHelper {
-
-    public static void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int scaledWidth, int scaledHeight, Vector2d mouseTurnVec) {
+    public static Vector2i render(DrawContext context, int scaledWidth, int scaledHeight, Vector2d mouseTurnVec) {
         int centerX = scaledWidth / 2;
         int centerY = scaledHeight / 2 - 1;
         mouseTurnVec.mul(50);
@@ -18,11 +17,11 @@ public class MomentumCrosshairWidget extends RenderHelper {
             ModMath.forBresenhamLine(
                     centerX, centerY,
                     centerX + (int) lineVec.x, centerY + (int) lineVec.y,
-                    blankPixel(matrices, vertexConsumers)
+                    blankPixel(context)
             );
         }
 
         // change the position of the crosshair, which is rendered up the stack
-        matrices.translate((int) mouseTurnVec.x, (int) mouseTurnVec.y, 0);
+        return new Vector2i((int) mouseTurnVec.x, (int) mouseTurnVec.y);
     }
 }

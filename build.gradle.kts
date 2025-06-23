@@ -70,7 +70,9 @@ dependencies {
         include(implementation(mixinSquared.format("fabric"))!!)
         ifStable("com.terraformersmc:modmenu:${property("deps.modmenu")}")
 
-        modApi("nl.enjarai:cicada-lib:${property("deps.cicada")}")
+        modApi("nl.enjarai:cicada-lib:${property("deps.cicada")}") {
+            exclude(group = "net.fabricmc.fabric-api")
+        }
         include(modImplementation("me.lucko:fabric-permissions-api:${property("deps.perm_api")}")!!)
 
         modRuntimeOnly("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-$loader")
