@@ -5,6 +5,8 @@ import dev.isxander.controlify.api.ControlifyApi;
 import dev.isxander.controlify.api.bind.ControlifyBindApi;
 import dev.isxander.controlify.api.bind.InputBindingSupplier;
 import dev.isxander.controlify.api.entrypoint.ControlifyEntrypoint;
+import dev.isxander.controlify.api.entrypoint.InitContext;
+import dev.isxander.controlify.api.entrypoint.PreInitContext;
 import dev.isxander.controlify.api.event.ControlifyEvents;
 import dev.isxander.controlify.bindings.BindContext;
 import net.minecraft.text.Text;
@@ -68,7 +70,11 @@ public class ControlifyCompat implements ControlifyEntrypoint {
     }
 
     @Override
-    public void onControlifyPreInit(ControlifyApi controlifyApi) {
+    public void onControlifyInit(InitContext initContext) {
+    }
+
+    @Override
+    public void onControlifyPreInit(PreInitContext preInitContext) {
         var bindings = ControlifyBindApi.get();
         bindings.registerBindContext(FALL_FLYING);
 
@@ -130,7 +136,7 @@ public class ControlifyCompat implements ControlifyEntrypoint {
         );
 
         RollEvents.LATE_CAMERA_MODIFIERS.register(context -> context
-                .useModifier(this::applyToRotation),
+                        .useModifier(this::applyToRotation),
                 5, DoABarrelRollClient::isFallFlying);
 
         ThrustEvents.MODIFY_THRUST_INPUT.register(input -> input + getThrustModifier());
@@ -140,6 +146,7 @@ public class ControlifyCompat implements ControlifyEntrypoint {
                 event.lookInput().zero();
             }
         });
+
     }
 
     @Override
