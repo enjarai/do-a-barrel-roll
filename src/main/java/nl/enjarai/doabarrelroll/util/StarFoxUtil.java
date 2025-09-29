@@ -94,7 +94,7 @@ public class StarFoxUtil {
     }
 
     public static void playBarrelRollSound(PlayerEntity player) {
-        player.getWorld().playSoundFromEntity(
+        player.getEntityWorld().playSoundFromEntity(
                 player, player, barrelRollSound, SoundCategory.PLAYERS,
                 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F
         );

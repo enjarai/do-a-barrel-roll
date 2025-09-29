@@ -121,7 +121,7 @@ public class ServerConfigHolder<P extends ConfigUpdateAckS2CPacket> {
 
             // Only set our instance if everything else succeeds
             instance = newConfig;
-            updateCallback.accept(player.getServer(), instance);
+            updateCallback.accept(player.getEntityWorld().getServer(), instance);
             save();
             return packetConstructor.construct(HandshakeServer.PROTOCOL_VERSION, true);
         } catch (RuntimeException e) {
