@@ -122,7 +122,7 @@ config.do_a_barrel_roll:
       Esto expulsará a cualquier jugador que no tenga el mod cargado.
     installed_timeout: Tiempo de espera de verificación de instalación
     installed_timeout.description: >
-      La cantidad de tiempo en segundos que el servidor esperará a que un cliente responda al saludo antes de expulsarlo.
+      La cantidad de tiempo en ticks que el servidor esperará a que un cliente responda al saludo antes de expulsarlo.
       §lAumenta esto si los jugadores con conexiones lentas están siendo expulsados a pesar de tener el mod instalado.
   gameplay:
     .: Jugabilidad
