@@ -128,7 +128,7 @@ config.do_a_barrel_roll:
       This will kick any players that don't have the mod loaded.
     installed_timeout: Installed Check Timeout
     installed_timeout.description: >
-      The amount of time in seconds that the server will 
+      The amount of time in ticks that the server will 
       wait for a client to respond to the handshake before kicking them.
       §lIncrease this if players with bad connections are getting kicked even though they have the mod installed.
   gameplay:
