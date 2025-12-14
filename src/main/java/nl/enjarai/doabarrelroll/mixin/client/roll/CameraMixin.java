@@ -7,6 +7,7 @@ import net.minecraft.client.render.Camera;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import nl.enjarai.doabarrelroll.api.RollCamera;
 import nl.enjarai.doabarrelroll.api.RollEntity;
 import nl.enjarai.doabarrelroll.math.MagicNumbers;
@@ -57,8 +58,8 @@ public abstract class CameraMixin implements RollCamera {
             method = "update",
             at = @At("HEAD")
     )
-    private void doABarrelRoll$captureTickDeltaAndUpdate(BlockView area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta, CallbackInfo ci, @Share("tickDelta") LocalFloatRef tickDeltaRef) {
-        tickDeltaRef.set(tickDelta);
+    private void doABarrelRoll$captureTickDeltaAndUpdate(World area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickProgress, CallbackInfo ci, @Share("tickDelta") LocalFloatRef tickDeltaRef) {
+        tickDeltaRef.set(tickProgress);
         isRolling = ((RollEntity) focusedEntity).doABarrelRoll$isRolling();
     }
 
@@ -66,7 +67,7 @@ public abstract class CameraMixin implements RollCamera {
             method = "update",
             at = @At("TAIL")
     )
-    private void doABarrelRoll$updateRollBack(BlockView area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta, CallbackInfo ci) {
+    private void doABarrelRoll$updateRollBack(World area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickProgress, CallbackInfo ci) {
         if (isRolling) {
             rollBack = roll;
             lastRollBack = roll;

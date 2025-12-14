@@ -5,6 +5,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.command.DefaultPermissions;
+import net.minecraft.command.permission.PermissionLevel;
 import nl.enjarai.doabarrelroll.DoABarrelRollClient;
 import nl.enjarai.doabarrelroll.api.event.RollContext;
 import nl.enjarai.doabarrelroll.api.rotation.RotationInstant;
@@ -174,8 +176,11 @@ public class ModConfig {
     public boolean getEnableThrust() {
         if (general.thrust.enable_thrust) {
             ClientPlayerEntity player;
-            if (DoABarrelRollClient.isConnectedToRealms() &&
-                    (player = MinecraftClient.getInstance().player) != null && player.hasPermissionLevel(2)) {
+            if (
+                DoABarrelRollClient.isConnectedToRealms()
+                    && (player = MinecraftClient.getInstance().player) != null
+                    && player.getPermissions().hasPermission(DefaultPermissions.GAMEMASTERS)
+            ) {
                 return true;
             }
 
