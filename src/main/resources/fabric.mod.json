@@ -52,7 +52,8 @@
         "fabric": "*",
         "minecraft": "${mc}",
         "java": ">=17",
-        "cicada": ">=0.6.0 <1.0.0"
+        "cicada": ">=0.6.0 <1.0.0",
+        "yet_another_config_lib_v3": "*"
     },
     "breaks": {
         "optifabric": "*",
