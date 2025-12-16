@@ -10,6 +10,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.command.DefaultPermissions;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -37,7 +38,7 @@ public class YACLImplementation {
         var inWorld = MinecraftClient.getInstance().world != null;
         ClientPlayerEntity player;
         var onRealms = DoABarrelRollClient.isConnectedToRealms() &&
-                (player = MinecraftClient.getInstance().player) != null && player.hasPermissionLevel(2);
+                (player = MinecraftClient.getInstance().player) != null && player.getPermissions().hasPermission(DefaultPermissions.GAMEMASTERS);
         var serverConfig = ClientNetworking.HANDSHAKE_CLIENT.getConfig();
 
         var thrustingAllowed = new Dependable(serverConfig.map(LimitedModConfigServer::allowThrusting).orElse(!inWorld || onRealms));

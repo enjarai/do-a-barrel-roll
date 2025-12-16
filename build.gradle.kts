@@ -2,7 +2,7 @@ plugins {
     `maven-publish`
     id("dev.architectury.loom")
     id("me.modmuss50.mod-publish-plugin")
-    id("me.fallenbreath.yamlang") version "1.3.1"
+    id("me.fallenbreath.yamlang") version "1.5.0"
 }
 
 // Variables
