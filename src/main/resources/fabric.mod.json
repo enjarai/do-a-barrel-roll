@@ -49,7 +49,7 @@
     },
     "depends": {
         "fabricloader": ">=0.15",
-        "fabric": "*",
+        "fabric-api": "*",
         "minecraft": "${mc}",
         "java": ">=17",
         "cicada": ">=0.6.0 <1.0.0"
